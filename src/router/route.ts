@@ -9,6 +9,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "home",
     component: () => import("../views/home.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+  },
 ];
 
 // 将路由数组导出给其他模块使用
