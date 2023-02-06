@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import qs from "qs";
+import Router from "../router/index";
 import { timeout } from "./config";
 
 let base_url: string;
@@ -39,7 +40,10 @@ base_interceptors.response.use(
         // 这里可以做清空storage并跳转到登录页的操作
         break;
       case 403:
-        message = "拒绝访问(403)";
+        message = "拒绝访问(403)，请登陆";
+        Router.push({
+          name: "login",
+        });
         break;
       case 404:
         message = "请求出错(404)";
