@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { useOsTheme, darkTheme } from "naive-ui";
 import { loading_ok, loading_status } from "./tool/loading";
-const osThemeRef = useOsTheme();
-const theme = computed(() => (osThemeRef.value === "dark" ? darkTheme : null));
+const theme = computed(() =>
+  useOsTheme().value === "dark" ? darkTheme : null
+);
+
+function mount() {
+  window.$message = useMessage();
+}
+
+mount();
 </script>
 
 <template>

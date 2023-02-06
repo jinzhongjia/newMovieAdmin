@@ -68,7 +68,8 @@ base_interceptors.response.use(
       default:
         message = `连接出错(${err.response?.status})!`;
     }
-    console.log(message);
+    // 通过naive ui的message函数提示用户
+    window.$message.error(message);
     return Promise.reject(err.response);
   }
 );
