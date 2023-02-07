@@ -23,6 +23,7 @@ const base_interceptors = base_http.interceptors;
 // 请求拦截
 base_interceptors.request.use();
 
+let un_login_trigger: boolean = true;
 // 响应拦截
 base_interceptors.response.use(
   (res: AxiosResponse) => {
@@ -37,13 +38,16 @@ base_interceptors.response.use(
         break;
       case 401:
         message = "未授权，请重新登录(401)";
-        // 这里可以做清空storage并跳转到登录页的操作
-        break;
-      case 403:
-        message = "拒绝访问(403)，请登陆";
+        if (!un_login_trigger) {
+          return Promise.reject(err.response);
+        }
         Router.push({
           name: "login",
         });
+        un_login_trigger = false;
+        break;
+      case 403:
+        message = "拒绝访问(403)，请登陆";
         break;
       case 404:
         message = "请求出错(404)";
