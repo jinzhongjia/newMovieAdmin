@@ -7,6 +7,7 @@ const password = ref("");
 // 存储是否记住密码
 const remember = ref(false);
 
+// 在windows对象注册函数
 (() => {
   window.$message = useMessage();
 })();
