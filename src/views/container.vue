@@ -14,12 +14,24 @@ const active = ref(true);
 </script>
 
 <template>
-	<n-drawer v-model:show="active" :width="502" placement="left">
-		<n-drawer-content title="斯通纳">
-			《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
-		</n-drawer-content>
-	</n-drawer>
-	<RouterView />
+	<n-grid cols="10" item-responsive responsive="screen">
+		<n-grid-item class="sider" span="0 m:0 l:1">
+			<!-- 这里是侧边栏 -->
+			<div style="height: 100vh">
+				<sider />
+			</div>
+		</n-grid-item>
+		<n-grid-item>
+			<div class="green">2</div>
+		</n-grid-item>
+	</n-grid>
+	<!-- <RouterView /> -->
 </template>
 
-<style></style>
+<style scoped>
+.sider {
+	border-width: 0px 1px 0px 0px;
+	border-color: #d3d3d3;
+	border-style: solid;
+}
+</style>

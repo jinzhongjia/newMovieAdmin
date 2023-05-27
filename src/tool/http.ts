@@ -80,7 +80,9 @@ base_interceptors.response.use(
 				message = `连接出错${msg} !`;
 		}
 		// 通过naive ui的message函数提示用户
-		window.$message.error(message);
+		if (err.response?.status) {
+			window.$message.error(message);
+		}
 		return Promise.reject(err.response);
 	}
 );
