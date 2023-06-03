@@ -2,16 +2,16 @@
 import type { RouteRecordRaw } from "vue-router";
 
 const children: RouteRecordRaw[] = [
-	{
-		path: "/",
-		name: "home",
-		component: () => import("../components/errors.vue"),
-	},
-	{
-		path: "dashboard",
-		name: "dashboard",
-		component: () => import("../views/dashboard.vue"),
-	},
+	// {
+	// 	path: "/",
+	// 	name: "home",
+	// 	component: () => import("../components/errors.vue"),
+	// },
+	// {
+	// 	path: "dashboard",
+	// 	name: "dashboard",
+	// 	component: () => import("../views/dashboard.vue"),
+	// },
 ];
 
 // 使用路由项目类型声明一个路由数组

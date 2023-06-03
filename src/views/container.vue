@@ -3,6 +3,8 @@
 
 import { get_version } from "../tool/api";
 
+import Head from "@/components/header.vue";
+
 // 向windows注入相关的message
 (() => {
 	window.$message = useMessage();
@@ -14,24 +16,42 @@ const active = ref(true);
 </script>
 
 <template>
-	<n-grid cols="10" item-responsive responsive="screen">
-		<n-grid-item class="sider" span="0 m:0 l:1">
-			<!-- 这里是侧边栏 -->
+	<n-layout has-sider>
+		<n-layout-sider bordered width="200px">
 			<div style="height: 100vh">
-				<sider />
+				<div
+					style="
+						width: 100%;
+						text-align: center;
+						padding: 15px 0;
+						font-weight: 700;
+						font-size: 18px;
+					"
+				>
+					GOMovie后台管理
+				</div>
+				<Sider />
 			</div>
-		</n-grid-item>
-		<n-grid-item>
-			<div class="green">2</div>
-		</n-grid-item>
-	</n-grid>
-	<!-- <RouterView /> -->
+		</n-layout-sider>
+		<n-layout>
+			<n-layout-header> <Head /> </n-layout-header>
+			<n-layout-content>
+				<div
+					style="
+						width: calc(100vw - 200px);
+						height: calc(100vh - 65px);
+						background-color: #f5f7f9;
+						padding: 5px 10px;
+						box-sizing: border-box;
+					"
+				>
+					<RouterView />6
+				</div>
+			</n-layout-content>
+		</n-layout>
+	</n-layout>
 </template>
 
 <style scoped>
-.sider {
-	border-width: 0px 1px 0px 0px;
-	border-color: #d3d3d3;
-	border-style: solid;
-}
+/* 245, 247, 249 */
 </style>
