@@ -35,21 +35,27 @@ const active = ref(true);
 		</n-layout-sider>
 		<n-layout>
 			<n-layout-header> <Head /> </n-layout-header>
-			<n-layout-content>
+			<n-layout-content :nativeScrollbar="false">
 				<div
 					style="
 						width: calc(100vw - 200px);
 						height: calc(100vh - 65px);
 						background-color: #f5f7f9;
-						padding: 5px 10px;
+						padding: 5px 0px 0px 0px;
 						box-sizing: border-box;
 					"
 				>
-					<RouterView />
+					<div class="box"><RouterView /></div>
 				</div>
 			</n-layout-content>
 		</n-layout>
 	</n-layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.box {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+</style>

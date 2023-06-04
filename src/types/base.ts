@@ -2,7 +2,8 @@ interface Source {
 	id: number;
 	name: string;
 	url: string;
-	ok: boolean;
+	progress: boolean;
+	able: boolean;
 }
 
 export type { Source };

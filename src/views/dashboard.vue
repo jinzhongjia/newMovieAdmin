@@ -1,5 +1,7 @@
 <script lang="ts" setup></script>
 
-<template></template>
+<template>
+	<div>当前这里是主面板</div>
+</template>
 
-<style></style>
+<style scoped></style>

@@ -7,6 +7,11 @@ const children: RouteRecordRaw[] = [
 		name: "dashboard",
 		component: () => import("@/views/dashboard.vue"),
 	},
+	{
+		path: "source",
+		name: "source",
+		component: () => import("@/views/source.vue"),
+	},
 	// {
 	// 	path: "dashboard",
 	// 	name: "dashboard",
