@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import qs from "qs";
-import Router from "../router/index";
-import { timeout } from "./config";
+import Router from "@/router";
+import { timeout } from "@/tool/config";
 
 let base_url: string;
 

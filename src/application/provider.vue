@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 该文件作为app下属的父组件，负责部分api的初始化工作
 
-import { get_version } from "../tool/api";
+import { get_version } from "@/tool/api";
 
 import Head from "@/components/header.vue";
 
@@ -45,13 +45,11 @@ const active = ref(true);
 						box-sizing: border-box;
 					"
 				>
-					<RouterView />6
+					<RouterView />
 				</div>
 			</n-layout-content>
 		</n-layout>
 	</n-layout>
 </template>
 
-<style scoped>
-/* 245, 247, 249 */
-</style>
+<style scoped></style>

@@ -1,4 +1,4 @@
-import { get, post } from "./http";
+import { get, post } from "@/tool/http";
 import qs from "qs";
 
 const login = function (

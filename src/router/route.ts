@@ -2,11 +2,11 @@
 import type { RouteRecordRaw } from "vue-router";
 
 const children: RouteRecordRaw[] = [
-	// {
-	// 	path: "/",
-	// 	name: "home",
-	// 	component: () => import("../components/errors.vue"),
-	// },
+	{
+		path: "/",
+		name: "dashboard",
+		component: () => import("@/views/dashboard.vue"),
+	},
 	// {
 	// 	path: "dashboard",
 	// 	name: "dashboard",
@@ -20,13 +20,13 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/",
 		name: "container",
-		component: () => import("../views/container.vue"),
+		component: () => import("@/application/provider.vue"),
 		children: children,
 	},
 	{
 		path: "/login",
 		name: "login",
-		component: () => import("../views/login.vue"),
+		component: () => import("@/application/login.vue"),
 	},
 ];
 
