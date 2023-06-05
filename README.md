@@ -14,4 +14,6 @@
 
 ## 截图
 
-![](https://github.com/jinzhongjia/newMovieAdmin/blob/src/current.png?raw=true)
+![](https://github.com/jinzhongjia/newMovieAdmin/blob/src/current-1.png)
+![](https://github.com/jinzhongjia/newMovieAdmin/blob/src/current-2.png)
+![](https://github.com/jinzhongjia/newMovieAdmin/blob/src/current-3.png)

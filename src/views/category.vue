@@ -1,51 +1,33 @@
 <script setup lang="ts">
 import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
-import { NButton } from "naive-ui";
 import { Ref } from "vue";
-import { Source } from "@/types/base";
-import { columns } from "@/data/source";
+import { columns } from "@/data/category";
+import { Category } from "@/types/base";
+
+// debug 导入
+import { randomNum } from "@/debug/tool";
 
 //  TODO: debug数据，需要进行处理
-const data: Ref<Source[]> = (() => {
-	let res: Source[] = [];
+const data: Ref<Category[]> = (() => {
+	let res: Category[] = [];
 	for (let index = 0; index < 20; index++) {
 		res.push({
 			id: index + 1,
-			name: "测试数据" + (index + 1).toString(),
-			url: "https://测试链接" + (index + 1).toString() + ".com",
-			progress: true,
-			able: true,
+			name: "测试分类" + (index + 1).toString(),
+			classNum: randomNum(0, 20),
+			movieNum: randomNum(100, 6000),
 		});
 	}
 	return ref(res);
 })();
 
-// TODO: 调试使用变量
-const formValue: Ref<Source> = ref({
-	id: 0,
-	name: "测试",
-	url: "测试",
-	progress: true,
-	able: true,
-});
-
-// TODO: 调试使用变量
-const isNew = ref(false);
-const show = ref(false);
-
-// TODO: 删除该函数以及对其的引用
-function tt() {
-	console.log(formValue.value.name);
-	console.log(formValue.value.url);
-}
-
-// TODO: debug变量
+//  TODO: debug数据，需要进行处理
 const page = ref(2);
 </script>
 <template>
 	<general-render>
 		<template #header>
-			<div style="white-space: nowrap">采集源</div>
+			<div style="white-space: nowrap">自建分类</div>
 		</template>
 		<template #header-extra>
 			<div class="icon-box">
@@ -57,13 +39,10 @@ const page = ref(2);
 			</div>
 			<div class="icon-box">
 				<n-button text type="primary" style="font-size: 24px" @click="">
-					<n-icon>
-						<AddCircle24Regular />
-					</n-icon>
+					<n-icon :component="AddCircle24Regular" />
 				</n-button>
 			</div>
 		</template>
-
 		<n-scrollbar style="max-height: calc(100vh - 65px - 58px - 5px - 60px)">
 			<n-scrollbar x-scrollable>
 				<n-data-table
@@ -75,23 +54,7 @@ const page = ref(2);
 				/>
 			</n-scrollbar>
 		</n-scrollbar>
-		<!-- 模态框 -->
-		<Model
-			title="ceshi"
-			:data="formValue"
-			:new="isNew"
-			:show="show"
-			@close="
-				() => {
-					show = !show;
-				}
-			"
-			@save="
-				() => {
-					tt();
-				}
-			"
-		/>
+
 		<template #footer>
 			<div class="pagination">
 				<n-pagination v-model:page="page" :page-count="100" />
@@ -106,6 +69,7 @@ const page = ref(2);
 	justify-content: center;
 	margin: 0 5px;
 }
+
 .pagination {
 	display: flex;
 	justify-content: center;

@@ -6,4 +6,22 @@ interface Source {
 	able: boolean;
 }
 
-export type { Source };
+interface Category {
+	id: number;
+	name: string;
+	classNum: number;
+	movieNum: number;
+}
+
+interface Movie {
+	id: number;
+	name: string;
+	director: string;
+	actor: string;
+	duration: string;
+	description: string;
+	pic: string;
+	url: string;
+}
+
+export type { Source, Category, Movie };

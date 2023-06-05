@@ -12,11 +12,21 @@ const children: RouteRecordRaw[] = [
 		name: "source",
 		component: () => import("@/views/source.vue"),
 	},
-	// {
-	// 	path: "dashboard",
-	// 	name: "dashboard",
-	// 	component: () => import("../views/dashboard.vue"),
-	// },
+	{
+		path: "category",
+		name: "category",
+		component: () => import("@/views/category.vue"),
+	},
+	{
+		path: "movies",
+		name: "movies",
+		component: () => import("@/views/movies.vue"),
+	},
+	{
+		path: "test",
+		name: "test",
+		component: () => import("@/views/test.vue"),
+	},
 ];
 
 // 使用路由项目类型声明一个路由数组

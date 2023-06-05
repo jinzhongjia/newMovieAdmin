@@ -65,15 +65,13 @@ const page = ref(2);
 		</template>
 
 		<n-scrollbar style="max-height: calc(100vh - 65px - 58px - 5px - 60px)">
-			<n-scrollbar x-scrollable>
-				<n-data-table
-					:columns="columns"
-					:data="data"
-					:bordered="false"
-					:single-line="false"
-					max-height="calc(100vh - 65px - 58px - 5px - 60px - 50px)"
-				/>
-			</n-scrollbar>
+			<n-data-table
+				:columns="columns"
+				:data="data"
+				:bordered="false"
+				:single-line="false"
+				max-height="calc(100vh - 65px - 58px - 5px - 60px - 50px)"
+			/>
 		</n-scrollbar>
 		<!-- 模态框 -->
 		<Model
@@ -106,6 +104,7 @@ const page = ref(2);
 	justify-content: center;
 	margin: 0 5px;
 }
+
 .pagination {
 	display: flex;
 	justify-content: center;

@@ -1,10 +1,10 @@
 import type { DataTableColumns } from "naive-ui";
 import { NButton, NSpace, NSwitch } from "naive-ui";
-import { Source } from "@/types/base";
 import { general_render } from "@/data/tool";
+import { Category } from "@/types/base";
 
 // 辅助通用操作函数
-const general_operate = (row: Source, index: number) =>
+const general_operate = (row: Category, index: number) =>
 	h(
 		NSpace,
 		{
@@ -25,17 +25,6 @@ const general_operate = (row: Source, index: number) =>
 			h(
 				NButton,
 				{
-					type: "info",
-					strong: true,
-					size: "small",
-					secondary: true,
-					onClick: () => {},
-				},
-				{ default: () => "重新采集" }
-			),
-			h(
-				NButton,
-				{
 					type: "error",
 					strong: true,
 					size: "small",
@@ -47,7 +36,7 @@ const general_operate = (row: Source, index: number) =>
 		]
 	);
 
-const columns = ref<DataTableColumns<Source>>([
+const columns = ref<DataTableColumns<Category>>([
 	{
 		title: "ID",
 		key: "id",
@@ -59,52 +48,30 @@ const columns = ref<DataTableColumns<Source>>([
 		title: "资源库名",
 		key: "name",
 		align: "center",
-		width: "150px",
+		minWidth:"200px",
 		ellipsis: true,
-		render(row: Source, index: number) {
+		render(row: Category, index: number) {
 			return general_render(row.name);
 		},
 	},
 	{
-		title: "资源库地址",
-		key: "url",
-		align: "center",
-		minWidth: "200px",
-		ellipsis: true,
-		render(row: Source, index: number) {
-			return general_render(row.url);
-		},
-	},
-	{
-		title: "采集进度",
-		key: "progress",
+		title: "采集类数",
+		key: "classNum",
 		align: "center",
 		width: "100px",
-		render(row: Source, index: number) {
-			return h("div", row.progress ? "已完成" : "未完成");
-		},
 	},
 	{
-		title: "采集情况",
-		key: "able",
+		title: "影片数",
+		key: "movieNum",
 		align: "center",
 		width: "100px",
-		render(row: Source, index: number) {
-			return h(NSwitch, {
-				value: row.able,
-				onUpdateValue: (value: boolean) => {
-					// TODO: 做相关的able处理
-					row.able = !row.able;
-				},
-			});
-		},
 	},
 	{
 		title: "操作",
 		key: "actions",
 		align: "center",
-		width: "250px",
-		render(row: Source, index: number) {
+		width: "200px",
+		render(row: Category, index: number) {
 			return general_render(general_operate(row, index));
 		},
 	},
