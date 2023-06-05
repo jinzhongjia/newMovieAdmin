@@ -50,9 +50,7 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		minWidth: "200px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.name);
-		},
+		render: (row: Movie, index: number) => general_render(row.name),
 	},
 	{
 		title: "导演",
@@ -60,18 +58,14 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		width: "100px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.director);
-		},
+		render: (row: Movie, index: number) => general_render(row.director),
 	},
 	{
 		title: "主演",
 		key: "actor",
 		align: "center",
 		width: "100px",
-		render(row: Movie, index: number) {
-			return general_render(row.actor);
-		},
+		render: (row: Movie, index: number) => general_render(row.actor),
 	},
 	{
 		title: "时长",
@@ -79,9 +73,7 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		width: "80px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.duration);
-		},
+		render: (row: Movie, index: number) => general_render(row.duration),
 	},
 	{
 		title: "影片描述",
@@ -89,9 +81,7 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		minWidth: "200px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.description);
-		},
+		render: (row: Movie, index: number) => general_render(row.description),
 	},
 	{
 		title: "封面链接",
@@ -99,9 +89,7 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		minWidth: "200px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.pic);
-		},
+		render: (row: Movie, index: number) => general_render(row.pic),
 	},
 	{
 		title: "影片直链",
@@ -109,9 +97,7 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		minWidth: "200px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(row.url);
-		},
+		render: (row: Movie, index: number) => general_render(row.url),
 	},
 	{
 		title: "操作",
@@ -119,9 +105,8 @@ const columns = ref<DataTableColumns<Movie>>([
 		align: "center",
 		width: "200px",
 		ellipsis: true,
-		render(row: Movie, index: number) {
-			return general_render(general_operate(row, index));
-		},
+		render: (row: Movie, index: number) =>
+			general_render(general_operate(row, index)),
 	},
 ]);
 

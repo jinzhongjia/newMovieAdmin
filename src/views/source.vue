@@ -43,73 +43,30 @@ function tt() {
 const page = ref(2);
 </script>
 <template>
-	<general-render>
-		<template #header>
-			<div style="white-space: nowrap">采集源</div>
+	<general-data-table
+		title="影片管理"
+		:columns="columns"
+		:data="data"
+		:page="page"
+	>
+		<template #extra>
+			<general-form-modal
+				title="ceshi"
+				:data="formValue"
+				:new="isNew"
+				:show="show"
+				@close="
+					() => {
+						show = !show;
+					}
+				"
+				@save="
+					() => {
+						tt();
+					}
+				"
+			/>
 		</template>
-		<template #header-extra>
-			<div class="icon-box">
-				<n-input placeholder="搜索" round>
-					<template #prefix>
-						<n-icon :component="Search20Filled" />
-					</template>
-				</n-input>
-			</div>
-			<div class="icon-box">
-				<n-button text type="primary" style="font-size: 24px" @click="">
-					<n-icon>
-						<AddCircle24Regular />
-					</n-icon>
-				</n-button>
-			</div>
-		</template>
-
-		<n-scrollbar style="max-height: calc(100vh - 65px - 58px - 5px - 60px)">
-			<n-scrollbar x-scrollable>
-				<n-data-table
-					:columns="columns"
-					:data="data"
-					:bordered="false"
-					:single-line="false"
-					max-height="calc(100vh - 65px - 58px - 5px - 60px - 50px)"
-				/>
-			</n-scrollbar>
-		</n-scrollbar>
-		<!-- 模态框 -->
-		<Model
-			title="ceshi"
-			:data="formValue"
-			:new="isNew"
-			:show="show"
-			@close="
-				() => {
-					show = !show;
-				}
-			"
-			@save="
-				() => {
-					tt();
-				}
-			"
-		/>
-		<template #footer>
-			<div class="pagination">
-				<n-pagination v-model:page="page" :page-count="100" />
-			</div>
-		</template>
-	</general-render>
+	</general-data-table>
 </template>
-<style scoped>
-.icon-box {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0 5px;
-}
-.pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 58px;
-}
-</style>
+<style scoped></style>

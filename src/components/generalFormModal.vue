@@ -17,8 +17,8 @@ const emit = defineEmits(["close", "save"]);
 
 // 包裹外部函数，获得内部关闭函数
 const close = () => {
-    emit("close");
-    // 返回false阻止默认行为
+	emit("close");
+	// 返回false阻止默认行为
 	return false;
 };
 
@@ -29,17 +29,12 @@ const save = () => {
 };
 </script>
 <template>
-	<n-modal
-		v-model:show="props.show"
-		preset="dialog"
-		type="info"
-		:mask-closable="false"
-		:onClose="close"
+	<general-modal
+		:show="props.show"
+		:title="props.new ? '新建采集源' : '修改采集源'"
+		width="500px"
+		@close="close"
 	>
-		<template #header>
-			<div>{{ props.new ? "新建采集源" : "修改采集源" }}</div>
-		</template>
-		<div style="height: 15px"></div>
 		<n-form :model="props.data" label-placement="left" label-width="auto">
 			<n-form-item label="名称" path="props.data.name">
 				<n-input
@@ -54,10 +49,13 @@ const save = () => {
 				/>
 			</n-form-item>
 		</n-form>
-		<template #action>
-			<n-button strong secondary type="primary" @click="save"
-				>保存</n-button
-			>
+		<template #footer>
+			<n-space justify="end">
+				<n-button strong secondary type="primary" @click="save">
+					保存
+				</n-button>
+			</n-space>
 		</template>
-	</n-modal>
+	</general-modal>
 </template>
+<style scoped></style>

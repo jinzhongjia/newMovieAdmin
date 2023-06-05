@@ -24,4 +24,11 @@ interface Movie {
 	url: string;
 }
 
-export type { Source, Category, Movie };
+interface Class {
+	id: number;
+	name: string;
+	isGet: boolean;
+	categoryId: number;
+}
+
+export type { Source, Category, Movie, Class };

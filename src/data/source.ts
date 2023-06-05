@@ -47,6 +47,15 @@ const general_operate = (row: Source, index: number) =>
 		]
 	);
 
+const render_switch = (row: Source, index: number) =>
+	h(NSwitch, {
+		value: row.able,
+		onUpdateValue: (value: boolean) => {
+			// TODO: 做相关的able处理
+			row.able = !row.able;
+		},
+	});
+
 const columns = ref<DataTableColumns<Source>>([
 	{
 		title: "ID",
@@ -61,9 +70,7 @@ const columns = ref<DataTableColumns<Source>>([
 		align: "center",
 		width: "150px",
 		ellipsis: true,
-		render(row: Source, index: number) {
-			return general_render(row.name);
-		},
+		render: (row: Source, index: number) => general_render(row.name),
 	},
 	{
 		title: "资源库地址",
@@ -71,42 +78,39 @@ const columns = ref<DataTableColumns<Source>>([
 		align: "center",
 		minWidth: "200px",
 		ellipsis: true,
-		render(row: Source, index: number) {
-			return general_render(row.url);
-		},
+		render: (row: Source, index: number) => general_render(row.url),
 	},
 	{
 		title: "采集进度",
 		key: "progress",
 		align: "center",
 		width: "100px",
-		render(row: Source, index: number) {
-			return h("div", row.progress ? "已完成" : "未完成");
-		},
+		render: (row: Source, index: number) =>
+			h("div", row.progress ? "已完成" : "未完成"),
 	},
 	{
 		title: "采集情况",
 		key: "able",
 		align: "center",
 		width: "100px",
-		render(row: Source, index: number) {
-			return h(NSwitch, {
-				value: row.able,
-				onUpdateValue: (value: boolean) => {
-					// TODO: 做相关的able处理
-					row.able = !row.able;
-				},
-			});
-		},
+		render: render_switch,
+		// render(row: Source, index: number) {
+		// 	return h(NSwitch, {
+		// 		value: row.able,
+		// 		onUpdateValue: (value: boolean) => {
+		// 			// TODO: 做相关的able处理
+		// 			row.able = !row.able;
+		// 		},
+		// 	});
+		// },
 	},
 	{
 		title: "操作",
 		key: "actions",
 		align: "center",
 		width: "250px",
-		render(row: Source, index: number) {
-			return general_render(general_operate(row, index));
-		},
+		render: (row: Source, index: number) =>
+			general_render(general_operate(row, index)),
 	},
 ]);
 

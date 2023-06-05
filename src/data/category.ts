@@ -25,6 +25,17 @@ const general_operate = (row: Category, index: number) =>
 			h(
 				NButton,
 				{
+					type: "info",
+					strong: true,
+					size: "small",
+					secondary: true,
+					onClick: () => {},
+				},
+				{ default: () => "设为主分类" }
+			),
+			h(
+				NButton,
+				{
 					type: "error",
 					strong: true,
 					size: "small",
@@ -48,11 +59,9 @@ const columns = ref<DataTableColumns<Category>>([
 		title: "资源库名",
 		key: "name",
 		align: "center",
-		minWidth:"200px",
+		minWidth: "200px",
 		ellipsis: true,
-		render(row: Category, index: number) {
-			return general_render(row.name);
-		},
+		render: (row: Category, index: number) => general_render(row.name),
 	},
 	{
 		title: "采集类数",
@@ -70,10 +79,9 @@ const columns = ref<DataTableColumns<Category>>([
 		title: "操作",
 		key: "actions",
 		align: "center",
-		width: "200px",
-		render(row: Category, index: number) {
-			return general_render(general_operate(row, index));
-		},
+		width: "300px",
+		render: (row: Category, index: number) =>
+			general_render(general_operate(row, index)),
 	},
 ]);
 

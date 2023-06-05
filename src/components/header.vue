@@ -13,28 +13,30 @@ const options = ref([
 		label: "前台首页",
 		key: "front",
 	},
-	{
-		label: "账号设置",
-		key: "setting",
-	},
+	// {
+	// 	label: "账号设置",
+	// 	key: "setting",
+	// },
 	{
 		label: "退出登录",
 		key: "logout",
 	},
 ]);
+
+// debug 数据
+const setting = ref({
+	show: false,
+});
 </script>
 <template>
 	<div class="header line general-shadow">
 		<div class="header-left">
-			<!-- <div style="padding: 0 12px">
-				<n-icon size="18">
-					<MenuUnfoldOutlined />
-				</n-icon>
-			</div> -->
 			<div style="padding: 0 12px">
-				<n-icon size="18">
-					<ReloadOutlined />
-				</n-icon>
+				<n-button quaternary circle>
+					<template #icon>
+						<n-icon size="18" :component="ReloadOutlined" />
+					</template>
+				</n-button>
 			</div>
 		</div>
 		<div class="header-right">
@@ -49,14 +51,17 @@ const options = ref([
 					</div>
 				</n-dropdown>
 			</div>
-			
+
 			<div style="padding: 0 12px">
-				<n-icon size="18" style="font-weight: bold">
-					<SettingOutlined />
-				</n-icon>
+				<n-button quaternary circle @click="setting.show = true">
+					<template #icon>
+						<n-icon size="18" :component="SettingOutlined" />
+					</template>
+				</n-button>
 			</div>
 		</div>
 	</div>
+	<setting-modal :show="setting.show" @close="setting.show = false" />
 </template>
 <style scoped>
 .header {
