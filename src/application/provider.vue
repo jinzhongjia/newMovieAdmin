@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// debug导入
+import "@/debug";
+
 // 该文件作为app下属的父组件，负责部分api的初始化工作
 import Head from "@/components/header.vue";
 import { get_version } from "@/tool/api";

@@ -31,4 +31,9 @@ interface Class {
 	categoryId: number;
 }
 
-export type { Source, Category, Movie, Class };
+interface sourceInstance {
+	info: Source;
+	classes: Class[];
+}
+
+export type { Source, Category, Movie, Class, sourceInstance };

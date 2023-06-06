@@ -3,23 +3,11 @@ import { Ref } from "vue";
 import { columns } from "@/data/category";
 import { Category } from "@/types/base";
 import { formType } from "@/data/form";
+import { useCategoryStore } from "@/store/category";
 
-// debug 导入
-import { randomNum } from "@/debug/tool";
+const categoryStore = useCategoryStore();
 
-//  TODO: debug数据，需要进行处理
-const data: Ref<Category[]> = (() => {
-	let res: Category[] = [];
-	for (let index = 0; index < 20; index++) {
-		res.push({
-			id: index + 1,
-			name: "测试分类" + (index + 1).toString(),
-			classNum: randomNum(0, 20),
-			movieNum: randomNum(100, 6000),
-		});
-	}
-	return ref(res);
-})();
+const data = computed(() => categoryStore.val);
 
 // TODO: 调试使用变量
 const formValue: Ref<Category> = ref({
@@ -52,7 +40,7 @@ function tt() {
 		<template #extra>
 			<general-form-modal
 				title="分类测试"
-				:data="formValue"
+				:data="data[0]"
 				:new="isNew"
 				:show="show"
 				:type="formType.category"

@@ -28,11 +28,6 @@ const children: RouteRecordRaw[] = [
 		component: () => import("@/views/class.vue"),
 	},
 	{
-		path: "test",
-		name: "test",
-		component: () => import("@/views/test.vue"),
-	},
-	{
 		path: "setting",
 		name: "setting",
 		component: () => import("@/views/setting.vue"),

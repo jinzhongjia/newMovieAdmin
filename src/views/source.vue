@@ -3,21 +3,12 @@ import { Ref } from "vue";
 import { Source } from "@/types/base";
 import { columns } from "@/data/source";
 import { formType } from "@/data/form";
+import { useSourceStore } from "@/store/source";
 
-//  TODO: debug数据，需要进行处理
-const data: Ref<Source[]> = (() => {
-	let res: Source[] = [];
-	for (let index = 0; index < 20; index++) {
-		res.push({
-			id: index + 1,
-			name: "采集源" + (index + 1).toString(),
-			url: "https://测试链接" + (index + 1).toString() + ".com",
-			progress: true,
-			able: true,
-		});
-	}
-	return ref(res);
-})();
+const sourceStore = useSourceStore();
+
+const data = computed(() => sourceStore.sources);
+
 
 // TODO: 调试使用变量
 const formValue: Ref<Source> = ref({
@@ -51,7 +42,7 @@ const page = ref(2);
 		<template #extra>
 			<general-form-modal
 				title="采集源测试"
-				:data="formValue"
+				:data="data[0]"
 				:new="isNew"
 				:show="show"
 				:type="formType.source"

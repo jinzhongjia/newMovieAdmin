@@ -5,9 +5,6 @@ import { createMenuOption, handleRoute } from "@/data/sider";
 import { useSourceStore } from "@/store/source";
 import { useStateStore } from "@/store/state";
 
-// debug引入
-import "@/debug/data";
-
 const value = ref("source_class_1");
 const openKeys: Ref<string[]> = ref(["source_1"]);
 const sourceStore = useSourceStore();
@@ -23,7 +20,7 @@ function update(key: string, item: MenuOption) {
 
 // 计算属性计算得到实际的menu
 const menu_instance = computed(() => {
-	return createMenuOption(sourceStore.val);
+	return createMenuOption(sourceStore.sources);
 });
 
 function menuExpanded(keys: string[]) {

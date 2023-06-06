@@ -5,5 +5,12 @@ import { Ref } from "vue";
 export const useMovieStore = defineStore("movie", () => {
 	const val: Ref<Movie[]> = ref([]);
 
-	return { val };
+	/**
+	 * 清空movies
+	 */
+	const clear = () => {
+		val.value = [];
+	};
+
+	return { val, clear };
 });
