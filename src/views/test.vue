@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
-import { NButton } from "naive-ui";
 import { Ref } from "vue";
 import { Source } from "@/types/base";
 import { columns } from "@/data/source";

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
-import { NButton } from "naive-ui";
 import { Ref } from "vue";
 import { Source } from "@/types/base";
 import { columns } from "@/data/source";
+import { formType } from "@/data/form";
 
 //  TODO: debug数据，需要进行处理
 const data: Ref<Source[]> = (() => {
@@ -11,7 +10,7 @@ const data: Ref<Source[]> = (() => {
 	for (let index = 0; index < 20; index++) {
 		res.push({
 			id: index + 1,
-			name: "测试数据" + (index + 1).toString(),
+			name: "采集源" + (index + 1).toString(),
 			url: "https://测试链接" + (index + 1).toString() + ".com",
 			progress: true,
 			able: true,
@@ -31,7 +30,7 @@ const formValue: Ref<Source> = ref({
 
 // TODO: 调试使用变量
 const isNew = ref(false);
-const show = ref(false);
+const show = ref(true);
 
 // TODO: 删除该函数以及对其的引用
 function tt() {
@@ -51,10 +50,11 @@ const page = ref(2);
 	>
 		<template #extra>
 			<general-form-modal
-				title="ceshi"
+				title="采集源测试"
 				:data="formValue"
 				:new="isNew"
 				:show="show"
+				:type="formType.source"
 				@close="
 					() => {
 						show = !show;

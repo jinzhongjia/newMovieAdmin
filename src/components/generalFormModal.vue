@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { Source } from "@/types/base";
+import { Source, Category, Movie } from "@/types/base";
+import { formType, matchOption } from "@/data/form";
 
 const props = withDefaults(
 	defineProps<{
-		new: boolean;
+		title: string;
 		show: boolean;
-		data: Source;
+		data: Source | Category | Movie;
+		type: formType;
 	}>(),
 	{
-		new: false,
 		show: true,
 	}
 );
@@ -31,12 +32,22 @@ const save = () => {
 <template>
 	<general-modal
 		:show="props.show"
-		:title="props.new ? '新建采集源' : '修改采集源'"
+		:title="props.title"
 		width="500px"
 		@close="close"
 	>
 		<n-form :model="props.data" label-placement="left" label-width="auto">
-			<n-form-item label="名称" path="props.data.name">
+			<n-form-item
+				v-for="ele in matchOption(props.type)"
+				:label="ele.label"
+				:path="`props.data.${ele.key}`"
+			>
+				<n-input
+					v-model:value="(props.data as any)[ele.key]"
+					:placeholder="`输入${ele.label}`"
+				/>
+			</n-form-item>
+			<!-- <n-form-item label="名称" path="props.data.name">
 				<n-input
 					v-model:value="props.data.name"
 					placeholder="输入采集源名称"
@@ -44,10 +55,10 @@ const save = () => {
 			</n-form-item>
 			<n-form-item label="地址" path="props.data.url">
 				<n-input
-					v-model:value="props.data.url"
+					v-model:value="(props.data as Source)['url']"
 					placeholder="输入采集源地址"
 				/>
-			</n-form-item>
+			</n-form-item> -->
 		</n-form>
 		<template #footer>
 			<n-space justify="end">
