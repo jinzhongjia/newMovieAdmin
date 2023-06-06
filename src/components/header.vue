@@ -8,6 +8,9 @@ import {
 
 import head_img from "@/assets/head-img.svg";
 
+const props = defineProps(["isMobile"]);
+const emit = defineEmits(["change"]);
+
 const options = ref([
 	{
 		label: "前台首页",
@@ -31,6 +34,13 @@ const setting = ref({
 <template>
 	<div class="header line general-shadow">
 		<div class="header-left">
+			<div v-show="props.isMobile" style="padding: 0 12px">
+				<n-button quaternary circle @click="emit('change')">
+					<template #icon>
+						<n-icon size="18" :component="MenuUnfoldOutlined" />
+					</template>
+				</n-button>
+			</div>
 			<div style="padding: 0 12px">
 				<n-button quaternary circle>
 					<template #icon>

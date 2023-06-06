@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
+import { useStateStore } from "@/store/state";
+
 const props = defineProps(["title", "columns", "data", "page"]);
+
+// 获取store
+const state = useStateStore();
+
+// 通过计算属性进行类结构操作
+const isMobile = computed(() => state.isMobile);
 </script>
 <template>
 	<general-render>
@@ -41,7 +49,11 @@ const props = defineProps(["title", "columns", "data", "page"]);
 		<slot name="extra" />
 		<template #footer>
 			<div class="pagination">
-				<n-pagination v-model:page="props.page" :page-count="100" />
+				<n-pagination
+					v-model:page="props.page"
+					:page-count="100"
+					:simple="isMobile"
+				/>
 			</div>
 		</template>
 	</general-render>

@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { Ref } from "vue";
 import { MenuOption } from "naive-ui";
 import { createMenuOption } from "@/data/sider";
 
+const value = ref("source_class_1");
+const openKeys: Ref<string[]> = ref([]);
+
 function update(key: string, item: MenuOption) {
-	console.log(item.label);
+	value.value = item.key as string;
 }
 
 let menu_instance: MenuOption[] = createMenuOption(
@@ -21,10 +25,22 @@ let menu_instance: MenuOption[] = createMenuOption(
 		return res;
 	})()
 );
+
+function menuExpanded(keys: string[]) {
+	if (keys.length) {
+		openKeys.value = [keys[keys.length - 1]];
+	}
+}
 </script>
 <template>
 	<n-scrollbar style="max-height: calc(100vh - 60px)" trigger="none">
-		<n-menu :options="menu_instance" @update:value="update" />
+		<n-menu
+			:options="menu_instance"
+			@update:value="update"
+			:value="value"
+			:expanded-keys="openKeys"
+			@update:expanded-keys="menuExpanded"
+		/>
 	</n-scrollbar>
 </template>
 <style></style>
