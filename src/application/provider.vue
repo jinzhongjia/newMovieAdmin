@@ -6,7 +6,7 @@ import { checkMobileMode } from "@/tool/isMobile";
 import { useStateStore } from "@/store/state";
 
 // 获取store
-const state = useStateStore();
+const stateStore = useStateStore();
 
 // 向windows注入相关的message
 (() => {
@@ -19,20 +19,20 @@ get_version(() => {});
 // 可写计算属性实现类结构操作
 const isMobile = computed({
 	get() {
-		return state.isMobile;
+		return stateStore.isMobile;
 	},
 	set(newVal: boolean) {
-		state.isMobile = newVal;
+		stateStore.isMobile = newVal;
 	},
 });
 
 // 可写计算属性实现类结构操作
 const active = computed({
 	get() {
-		return state.drawerIsActive;
+		return stateStore.drawerIsActive;
 	},
 	set(newVal: boolean) {
-		state.drawerIsActive = newVal;
+		stateStore.drawerIsActive = newVal;
 	},
 });
 
@@ -101,7 +101,13 @@ onMounted(() => {
 						box-sizing: border-box;
 					"
 				>
-					<div class="box"><RouterView /></div>
+					<div class="box">
+						<router-view v-slot="{ Component }">
+							<keep-alive>
+								<component :is="Component" />
+							</keep-alive>
+						</router-view>
+					</div>
 				</div>
 			</n-layout-content>
 		</n-layout>

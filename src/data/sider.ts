@@ -9,8 +9,8 @@ import {
 } from "@vicons/fluent";
 import { MenuOption, NIcon } from "naive-ui";
 import { Component } from "vue";
-
 import { Source } from "@/types/base";
+import router from "@/router";
 
 enum menuType {
 	panel,
@@ -28,7 +28,6 @@ const sider_menu: MenuOption[] = [
 		key: "panel",
 		icon: renderIcon(Home28Regular),
 		type: menuType.panel,
-		
 	},
 	{
 		label: "采集源",
@@ -88,4 +87,39 @@ function createMenuOption(arr: Array<Source>): MenuOption[] {
 	return res;
 }
 
-export { createMenuOption };
+function handleRoute(key: string, item: MenuOption) {
+	switch (item.type) {
+		case menuType.panel:
+			router.push({
+				name: "dashboard",
+			});
+			break;
+		case menuType.sourceManager:
+			router.push({
+				name: "source",
+			});
+			break;
+		case menuType.categoryManager:
+			router.push({
+				name: "category",
+			});
+			break;
+		case menuType.movieManager:
+			router.push({
+				name: "movies",
+			});
+			break;
+		case menuType.sourceClass:
+			router.push({
+				name: "class",
+			});
+			break;
+		case menuType.sourceMovie:
+			router.push({
+				name: "movies",
+			});
+			break;
+	}
+}
+
+export { createMenuOption, handleRoute };

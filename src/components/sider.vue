@@ -1,34 +1,36 @@
 <script setup lang="ts">
 import { Ref } from "vue";
 import { MenuOption } from "naive-ui";
-import { createMenuOption } from "@/data/sider";
+import { createMenuOption, handleRoute } from "@/data/sider";
+import { useSourceStore } from "@/store/source";
+import { useStateStore } from "@/store/state";
+
+// debug引入
+import "@/debug/data";
 
 const value = ref("source_class_1");
-const openKeys: Ref<string[]> = ref([]);
+const openKeys: Ref<string[]> = ref(["source_1"]);
+const sourceStore = useSourceStore();
+// 获取store
+const stateStore = useStateStore();
 
 function update(key: string, item: MenuOption) {
+	console.log(key);
 	value.value = item.key as string;
+	handleRoute(key, item);
+	stateStore.hideDrawer();
 }
 
-let menu_instance: MenuOption[] = createMenuOption(
-	(() => {
-		let res = [];
-		for (let index = 0; index < 10; index++) {
-			res.push({
-				id: index + 1,
-				name: "采集源" + (index + 1).toString(),
-				url: "测试链接" + (index + 1).toString(),
-				progress: false,
-				able: false,
-			});
-		}
-		return res;
-	})()
-);
+// 计算属性计算得到实际的menu
+const menu_instance = computed(() => {
+	return createMenuOption(sourceStore.val);
+});
 
 function menuExpanded(keys: string[]) {
 	if (keys.length) {
 		openKeys.value = [keys[keys.length - 1]];
+	} else {
+		openKeys.value = [];
 	}
 }
 </script>

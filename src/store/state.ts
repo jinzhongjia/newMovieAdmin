@@ -6,5 +6,9 @@ export const useStateStore = defineStore("state", () => {
 	const isMobile = ref(false);
 	const drawerIsActive = ref(false);
 
-	return { isMobile, drawerIsActive };
+	function hideDrawer() {
+		drawerIsActive.value = false;
+	}
+
+	return { isMobile, drawerIsActive, hideDrawer };
 });

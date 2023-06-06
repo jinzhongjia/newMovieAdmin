@@ -5,10 +5,10 @@ import { useStateStore } from "@/store/state";
 const props = defineProps(["title", "columns", "data", "page"]);
 
 // 获取store
-const state = useStateStore();
+const stateStore = useStateStore();
 
 // 通过计算属性进行类结构操作
-const isMobile = computed(() => state.isMobile);
+const isMobile = computed(() => stateStore.isMobile);
 </script>
 <template>
 	<general-render>
