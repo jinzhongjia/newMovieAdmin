@@ -1,5 +1,3 @@
-import { Source, Category, Movie } from "@/types/base";
-
 interface formOption {
 	label: string;
 	key: string;
@@ -71,15 +69,6 @@ function matchOption(type: formType): formOption[] {
 	}
 }
 
-// function matchType(type: formType) {
-// 	switch (type) {
-// 		case formType.source:
-// 			return Source;
-// 		case formType.category:
-// 			return Category;
-// 		case formType.movie:
-// 			return Movie;
-// 	}
-// }
+
 
 export { sourceOption, categoryOption, movieOption, formType, matchOption };

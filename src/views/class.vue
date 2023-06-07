@@ -29,6 +29,7 @@ const page = ref(2);
 		:columns="columns"
 		:data="data"
 		:page="page"
+		:isAdd="false"
 	></general-data-table>
 </template>
 <style scoped></style>

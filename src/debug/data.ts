@@ -1,6 +1,4 @@
-import { useSourceStore } from "@/store/source";
-import { useMovieStore } from "@/store/movies";
-import { useCategoryStore } from "@/store/category";
+import { useCategoryStore, useSourceStore, useMovieStore } from "@/store";
 import { Class } from "@/types/base";
 import { randomNum } from "@/debug/tool";
 

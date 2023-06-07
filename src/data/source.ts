@@ -1,7 +1,12 @@
 import type { DataTableColumns } from "naive-ui";
 import { NButton, NSpace, NSwitch } from "naive-ui";
-import { Source } from "@/types/base";
+import { Source, cloneSource } from "@/types/base";
 import { general_render } from "@/data/tool";
+import { useStateStore } from "@/store";
+
+const stateStore = useStateStore();
+
+const sourceModal = computed(() => stateStore.sourceModal);
 
 // 辅助通用操作函数
 const general_operate = (row: Source, index: number) =>
@@ -18,7 +23,12 @@ const general_operate = (row: Source, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						sourceModal.value.data = cloneSource(row);
+						sourceModal.value.origin = row;
+						sourceModal.value.new = false;
+						sourceModal.value.show = true;
+					},
 				},
 				{ default: () => "修改" }
 			),

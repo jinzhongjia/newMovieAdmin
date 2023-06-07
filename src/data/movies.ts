@@ -1,7 +1,12 @@
 import type { DataTableColumns } from "naive-ui";
-import { NButton, NSpace, NSwitch } from "naive-ui";
+import { NButton, NSpace } from "naive-ui";
 import { general_render } from "@/data/tool";
-import { Movie } from "@/types/base";
+import { Movie, cloneMovie } from "@/types/base";
+import { useStateStore } from "@/store";
+
+const stateStore = useStateStore();
+
+const movieModal = computed(() => stateStore.movieModal);
 
 // 辅助通用操作函数
 const general_operate = (row: Movie, index: number) =>
@@ -18,7 +23,12 @@ const general_operate = (row: Movie, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						movieModal.value.data = cloneMovie(row);
+						movieModal.value.origin = row;
+						movieModal.value.new = false;
+						movieModal.value.show = true;
+					},
 				},
 				{ default: () => "修改" }
 			),

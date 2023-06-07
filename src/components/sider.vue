@@ -2,8 +2,7 @@
 import { Ref } from "vue";
 import { MenuOption } from "naive-ui";
 import { createMenuOption, handleRoute } from "@/data/sider";
-import { useSourceStore } from "@/store/source";
-import { useStateStore } from "@/store/state";
+import { useSourceStore, useStateStore } from "@/store";
 
 const value = ref("source_class_1");
 const openKeys: Ref<string[]> = ref(["source_1"]);

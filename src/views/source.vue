@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { columns } from "@/data/source";
-import { useSourceStore } from "@/store/source";
-import { useStateStore } from "@/store/state";
+import { useSourceStore, useStateStore } from "@/store";
+import { Source, cloneSource } from "@/types/base";
 
 const sourceStore = useSourceStore();
 const stateStore = useStateStore();
@@ -11,6 +11,20 @@ const sourceModal = computed(() => stateStore.sourceModal);
 
 // TODO: debug变量
 const page = ref(2);
+
+// debug函数
+const add = () => {
+	let newval: Source = cloneSource({
+		id: -1,
+		name: "",
+		url: "",
+		progress: false,
+		able: false,
+	});
+	sourceModal.value.data = newval;
+	sourceModal.value.new = true;
+	sourceModal.value.show = true;
+};
 </script>
 <template>
 	<general-data-table
@@ -18,6 +32,8 @@ const page = ref(2);
 		:columns="columns"
 		:data="data"
 		:page="page"
+		:add="add"
+		:isAdd="true"
 	>
 		<template #extra>
 			<general-form-modal

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { columns } from "@/data/category";
-import { useCategoryStore } from "@/store/category";
-import { useStateStore } from "@/store/state";
+import { useCategoryStore, useStateStore } from "@/store";
+import { Category, cloneCategory } from "@/types/base";
 
 const categoryStore = useCategoryStore();
 const stateStore = useStateStore();
@@ -11,6 +11,18 @@ const categoryModal = computed(() => stateStore.categoryModal);
 
 //  TODO: debug数据，需要进行处理
 const page = ref(2);
+// debug函数
+const add = () => {
+	let newval: Category = cloneCategory({
+		id: -1,
+		name: "",
+		classNum: 0,
+		movieNum: 0,
+	});
+	categoryModal.value.data = newval;
+	categoryModal.value.new = true;
+	categoryModal.value.show = true;
+};
 </script>
 <template>
 	<general-data-table
@@ -18,6 +30,8 @@ const page = ref(2);
 		:columns="columns"
 		:data="data"
 		:page="page"
+		:add="add"
+		:isAdd="true"
 	>
 		<template #extra>
 			<general-form-modal

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
-import { useStateStore } from "@/store/state";
+import { useStateStore } from "@/store";
 
-const props = defineProps(["title", "columns", "data", "page"]);
+const props = defineProps(["title", "columns", "data", "page", "add", "isAdd"]);
 
 // 获取store
 const stateStore = useStateStore();
@@ -23,11 +23,11 @@ const isMobile = computed(() => stateStore.isMobile);
 					</template>
 				</n-input>
 			</div>
-			<div class="icon-box">
+			<div v-if="props.isAdd" class="icon-box">
 				<n-button
 					type="primary"
 					style="font-size: 24px"
-					@click=""
+					@click="props.add"
 					quaternary
 					circle
 				>

@@ -6,7 +6,7 @@ import "@/debug";
 import Head from "@/components/header.vue";
 import { get_version } from "@/tool/api";
 import { checkMobileMode } from "@/tool/isMobile";
-import { useStateStore } from "@/store/state";
+import { useStateStore } from "@/store";
 
 // 获取store
 const stateStore = useStateStore();

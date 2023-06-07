@@ -7,8 +7,10 @@ import { Ref, computed } from "vue";
 
 interface modalData {
 	data: Source | Category | Movie;
+	origin: Source | Category | Movie;
 	show: boolean;
 	type: formType;
+	new: boolean;
 	close: Function;
 	save: Function;
 }
@@ -29,12 +31,32 @@ export const useStateStore = defineStore("state", () => {
 			progress: true,
 			able: true,
 		} as Source,
-		show: true,
+		origin: {
+			id: 0,
+			name: "",
+			url: "",
+			progress: true,
+			able: true,
+		} as Source,
+		show: false,
 		type: formType.source,
+		new: false,
 		close: () => {
 			sourceModal.value.show = false;
 		},
-		save: () => {},
+		save: () => {
+			if (!sourceModal.value.new) {
+				const data = computed(() => sourceModal.value.data as Source);
+				const origin = computed(
+					() => sourceModal.value.origin as Source
+				);
+
+				origin.value.name = data.value.name;
+				origin.value.url = data.value.url;
+			} else {
+				console.log("添加一个东西");
+			}
+		},
 	});
 
 	const categoryModal: Ref<modalData> = ref({
@@ -44,12 +66,35 @@ export const useStateStore = defineStore("state", () => {
 			classNum: 0,
 			movieNum: 0,
 		} as Category,
-		show: true,
+		origin: {
+			id: 0,
+			name: "",
+			classNum: 0,
+			movieNum: 0,
+		} as Category,
+		show: false,
 		type: formType.category,
+		new: false,
 		close: () => {
 			categoryModal.value.show = false;
 		},
-		save: () => {},
+		save: () => {
+			// (categoryModal.value.origin as Category).id = (
+			// 	categoryModal.value.data as Category
+			// ).id;
+			if (!categoryModal.value.new) {
+				const data = computed(
+					() => categoryModal.value.data as Category
+				);
+				const origin = computed(
+					() => categoryModal.value.origin as Category
+				);
+
+				origin.value.name = data.value.name;
+			} else {
+				console.log("添加一个东西");
+			}
+		},
 	});
 
 	const movieModal: Ref<modalData> = ref({
@@ -63,12 +108,37 @@ export const useStateStore = defineStore("state", () => {
 			pic: "",
 			url: "",
 		} as Movie,
-		show: true,
+		origin: {
+			id: 0,
+			name: "",
+			director: "",
+			actor: "",
+			duration: "",
+			description: "",
+			pic: "",
+			url: "",
+		} as Movie,
+		show: false,
 		type: formType.movie,
+		new: false,
 		close: () => {
 			movieModal.value.show = false;
 		},
-		save: () => {},
+		save: () => {
+			if (!movieModal.value.new) {
+				const data = computed(() => movieModal.value.data as Movie);
+				const origin = computed(() => movieModal.value.origin as Movie);
+				origin.value.name = data.value.name;
+				origin.value.director = data.value.director;
+				origin.value.actor = data.value.actor;
+				origin.value.duration = data.value.duration;
+				origin.value.description = data.value.description;
+				origin.value.pic = data.value.pic;
+				origin.value.url = data.value.url;
+			} else {
+				console.log("添加一个东西");
+			}
+		},
 	});
 
 	return {
