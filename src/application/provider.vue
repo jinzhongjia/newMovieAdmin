@@ -107,7 +107,9 @@ onMounted(() => {
 					<div class="box">
 						<router-view v-slot="{ Component }">
 							<keep-alive>
-								<component :is="Component" />
+								<Transition>
+									<component :is="Component" />
+								</Transition>
 							</keep-alive>
 						</router-view>
 					</div>
@@ -122,5 +124,18 @@ onMounted(() => {
 	width: 100%;
 	height: 100%;
 	background-color: white;
+}
+</style>
+
+<style>
+/* 下面我们会解释这些 class 是做什么的 */
+.v-enter-active,
+.v-leave-active {
+	transition: opacity 0.25s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+	opacity: 0;
 }
 </style>
