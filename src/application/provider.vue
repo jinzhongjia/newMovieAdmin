@@ -1,12 +1,28 @@
 <script setup lang="ts">
 // debug导入
-import "@/debug";
+import "@/mock";
 
 // 该文件作为app下属的父组件，负责部分api的初始化工作
 import Head from "@/components/header.vue";
 import { get_version } from "@/tool/api";
 import { checkMobileMode } from "@/tool/isMobile";
 import { useStateStore } from "@/store";
+
+import { bindRoute } from "@/data/sider";
+
+const route = useRoute();
+
+watch(
+	[
+		() => (route.params.id != undefined ? route.params.id : ""),
+		() => route.name,
+	],
+	(newId, newName) => {
+		bindRoute(route.name, route.params);
+	}
+);
+
+bindRoute(route.name, route.params);
 
 // 获取store
 const stateStore = useStateStore();

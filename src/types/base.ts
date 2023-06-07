@@ -34,6 +34,7 @@ interface Class {
 interface sourceInstance {
 	info: Source;
 	classes: Class[];
+	page: number;
 }
 
 const cloneSource = (val: Source) =>

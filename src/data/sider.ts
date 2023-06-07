@@ -11,6 +11,28 @@ import { MenuOption, NIcon } from "naive-ui";
 import { Component } from "vue";
 import { Source } from "@/types/base";
 import router from "@/router";
+import { useSourceStore, useStateStore } from "@/store";
+
+const sourceStore = useSourceStore();
+const stateStore = useStateStore();
+
+const value = computed({
+	get: () => stateStore.drawer.val,
+	set: (newval: string) => {
+		stateStore.drawer.val = newval;
+	},
+});
+
+const openKeys = computed({
+	get: () => stateStore.drawer.openKeys,
+	set: (newval: string[]) => {
+		stateStore.drawer.openKeys = newval;
+	},
+});
+
+const menuInstances = computed(() => {
+	return createMenuOption(sourceStore.sources);
+});
 
 enum menuType {
 	panel,
@@ -25,7 +47,7 @@ enum menuType {
 const sider_menu: MenuOption[] = [
 	{
 		label: "仪表盘",
-		key: "panel",
+		key: "dashboard",
 		icon: renderIcon(Home28Regular),
 		type: menuType.panel,
 	},
@@ -97,29 +119,95 @@ function handleRoute(key: string, item: MenuOption) {
 		case menuType.sourceManager:
 			router.push({
 				name: "source",
+				params: {
+					page: 1,
+				},
 			});
 			break;
 		case menuType.categoryManager:
 			router.push({
 				name: "category",
+				params: {
+					page: 1,
+				},
 			});
 			break;
 		case menuType.movieManager:
 			router.push({
 				name: "movies",
+				params: {
+					page: 1,
+				},
 			});
 			break;
 		case menuType.sourceClass:
 			router.push({
-				name: "class",
+				name: "source-class",
+				params: {
+					id: item.id as number,
+					page: 1,
+				},
 			});
 			break;
 		case menuType.sourceMovie:
 			router.push({
-				name: "movies",
+				name: "source-movies",
+				params: {
+					id: item.id as number,
+					page: 1,
+				},
 			});
 			break;
 	}
 }
 
-export { createMenuOption, handleRoute };
+function update(key: string, item: MenuOption) {
+	value.value = item.key as string;
+	handleRoute(key, item);
+	stateStore.hideDrawer();
+}
+
+function menuExpanded(keys: string[]) {
+	if (keys.length) {
+		openKeys.value = [keys[keys.length - 1]];
+	} else {
+		openKeys.value = [];
+	}
+}
+
+const bindRoute = (name: any, params: any) => {
+	console.log("绑定一次");
+	switch (name) {
+		case "source-movies":
+			value.value = "source_movie_" + (params.id as string);
+			openKeys.value = ["source_" + (params.id as string)];
+			break;
+		case "source-class":
+			value.value = "source_class_" + (params.id as string);
+			openKeys.value = ["source_" + (params.id as string)];
+			break;
+		case "dashboard":
+			value.value = "dashboard";
+			break;
+		case "source":
+			value.value = "source_manager";
+			break;
+		case "category":
+			value.value = "category_manager";
+			break;
+		case "movies":
+			value.value = "movie_manager";
+			break;
+	}
+};
+
+export {
+	createMenuOption,
+	handleRoute,
+	update,
+	menuExpanded,
+	bindRoute,
+	value,
+	openKeys,
+	menuInstances,
+};

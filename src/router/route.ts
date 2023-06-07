@@ -8,26 +8,32 @@ const children: RouteRecordRaw[] = [
 		component: () => import("@/views/dashboard.vue"),
 	},
 	{
-		path: "source",
+		path: "/source/:page?",
 		name: "source",
 		component: () => import("@/views/source.vue"),
 	},
 	{
-		path: "category",
+		path: "/category/:page?",
 		name: "category",
 		component: () => import("@/views/category.vue"),
 	},
 	{
-		path: "movies",
+		path: "/movies/:page?",
 		name: "movies",
 		component: () => import("@/views/movies.vue"),
 	},
 	{
-		path: "class",
-		name: "class",
+		path: "/source/:id/class/:page?",
+		name: "source-class",
 		component: () => import("@/views/class.vue"),
 	},
 	{
+		path: "/source/:id/movies/:page?",
+		name: "source-movies",
+		component: () => import("@/views/movies.vue"),
+	},
+	{
+		// 当前该路由用不上
 		path: "setting",
 		name: "setting",
 		component: () => import("@/views/setting.vue"),

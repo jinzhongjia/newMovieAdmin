@@ -4,7 +4,7 @@ import { Class } from "@/types/base";
 import { columns } from "@/data/class";
 
 // debug 导入
-import { randomNum } from "@/debug/tool";
+import { randomNum } from "@/mock/tool";
 
 //  TODO: debug数据，需要进行处理
 const data: Ref<Class[]> = (() => {

@@ -1,6 +1,6 @@
 import { useCategoryStore, useSourceStore, useMovieStore } from "@/store";
 import { Class } from "@/types/base";
-import { randomNum } from "@/debug/tool";
+import { randomNum } from "@/mock/tool";
 
 const sourceStore = useSourceStore();
 const movieStore = useMovieStore();
@@ -29,6 +29,7 @@ const categoryStore = useCategoryStore();
 				}
 				return res;
 			})(),
+			page: index,
 		});
 	}
 
