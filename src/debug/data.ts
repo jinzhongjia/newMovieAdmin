@@ -16,8 +16,8 @@ const categoryStore = useCategoryStore();
 				id: index + 1,
 				name: "采集源" + (index + 1).toString(),
 				url: "测试链接" + (index + 1).toString(),
-				progress: false,
-				able: false,
+				progress: randomNum(0, 20) < 10 ? false : true,
+				able: randomNum(0, 20) < 10 ? false : true,
 			},
 			classes: (() => {
 				let res: Class[] = [];
