@@ -16,17 +16,12 @@ const options = ref([
 		label: "前台首页",
 		key: "front",
 	},
-	// {
-	// 	label: "账号设置",
-	// 	key: "setting",
-	// },
 	{
 		label: "退出登录",
 		key: "logout",
 	},
 ]);
 
-// debug 数据
 const setting = ref({
 	show: false,
 });

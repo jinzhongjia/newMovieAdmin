@@ -2,7 +2,7 @@
 import { Ref } from "vue";
 import { Class } from "@/types/base";
 import { columns } from "@/data/class";
-
+import { createPage } from "@/data/tool";
 // debug 导入
 import { randomNum } from "@/mock/tool";
 
@@ -20,15 +20,18 @@ const data: Ref<Class[]> = (() => {
 	return ref(res);
 })();
 
-//  TODO: debug数据，需要进行处理
-const page = ref(2);
+const page = createPage(1, 10, (newval: number) => {
+	page.value.page = newval;
+});
 </script>
 <template>
 	<general-data-table
 		title="采集类"
 		:columns="columns"
 		:data="data"
-		:page="page"
+		:page="page.page"
+		:pageCount="page.pageCount"
+		:update="page.update"
 		:isAdd="false"
 	></general-data-table>
 </template>

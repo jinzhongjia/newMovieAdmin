@@ -15,6 +15,8 @@ interface modalData {
 	save: Function;
 }
 
+
+
 const drawerIsActive = ref(false);
 const isMobile = ref(false);
 
@@ -137,6 +139,8 @@ const drawer = ref({
 	val: "" as string,
 	openKeys: [] as string[],
 });
+
+
 
 export const useStateStore = defineStore("state", () => {
 	return {

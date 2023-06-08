@@ -2,6 +2,7 @@
 import { columns } from "@/data/category";
 import { useCategoryStore, useStateStore } from "@/store";
 import { Category, cloneCategory } from "@/types/base";
+import { createPage } from "@/data/tool";
 
 const categoryStore = useCategoryStore();
 const stateStore = useStateStore();
@@ -9,8 +10,10 @@ const stateStore = useStateStore();
 const data = computed(() => categoryStore.val);
 const categoryModal = computed(() => stateStore.categoryModal);
 
-//  TODO: debug数据，需要进行处理
-const page = ref(2);
+const page = createPage(1, 10, (newval: number) => {
+	page.value.page = newval;
+});
+
 // debug函数
 const add = () => {
 	let newval: Category = cloneCategory({
@@ -29,7 +32,9 @@ const add = () => {
 		title="自建分类"
 		:columns="columns"
 		:data="data"
-		:page="page"
+		:page="page.page"
+		:pageCount="page.pageCount"
+		:update="page.update"
 		:add="add"
 		:isAdd="true"
 	>

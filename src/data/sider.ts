@@ -176,7 +176,6 @@ function menuExpanded(keys: string[]) {
 }
 
 const bindRoute = (name: any, params: any) => {
-	console.log("绑定一次");
 	switch (name) {
 		case "source-movies":
 			value.value = "source_movie_" + (params.id as string);

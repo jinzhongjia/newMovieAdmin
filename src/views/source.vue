@@ -2,6 +2,7 @@
 import { columns } from "@/data/source";
 import { useSourceStore, useStateStore } from "@/store";
 import { Source, cloneSource } from "@/types/base";
+import { createPage } from "@/data/tool";
 
 const sourceStore = useSourceStore();
 const stateStore = useStateStore();
@@ -9,8 +10,9 @@ const stateStore = useStateStore();
 const data = computed(() => sourceStore.sources);
 const sourceModal = computed(() => stateStore.sourceModal);
 
-// TODO: debug变量
-const page = ref(2);
+const page = createPage(1, 10, (newval: number) => {
+	page.value.page = newval;
+});
 
 // debug函数
 const add = () => {
@@ -31,7 +33,9 @@ const add = () => {
 		title="影片管理"
 		:columns="columns"
 		:data="data"
-		:page="page"
+		:page="page.page"
+		:pageCount="page.pageCount"
+		:update="page.update"
 		:add="add"
 		:isAdd="true"
 	>
