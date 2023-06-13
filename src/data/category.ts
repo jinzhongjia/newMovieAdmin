@@ -39,6 +39,7 @@ const general_operate = (row: Category, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
+					disabled: row.main,
 					onClick: () => {},
 				},
 				{ default: () => "设为主分类" }

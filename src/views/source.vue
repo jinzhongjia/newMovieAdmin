@@ -10,7 +10,7 @@ const stateStore = useStateStore();
 const data = computed(() => sourceStore.sources);
 const sourceModal = computed(() => stateStore.sourceModal);
 
-const page = createPage(1, 10, (newval: number) => {
+const page = createPage(1, 1, (newval: number) => {
 	page.value.page = newval;
 });
 

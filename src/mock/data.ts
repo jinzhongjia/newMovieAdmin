@@ -54,6 +54,7 @@ const categoryStore = useCategoryStore();
 			name: "测试分类" + (index + 1).toString(),
 			classNum: randomNum(0, 20),
 			movieNum: randomNum(100, 6000),
+			main: randomNum(0, 20) > 10 ? true : false,
 		});
 	}
 })();

@@ -15,7 +15,10 @@ const base_http = axios.create({
 	baseURL: base_url,
 	timeout: timeout,
 	headers: { "content-type": "application/x-www-form-urlencoded" },
+	withCredentials: true,
 });
+
+axios.defaults.withCredentials = true;
 
 // 基本的拦截器
 const base_interceptors = base_http.interceptors;
@@ -41,9 +44,9 @@ base_interceptors.response.use(
 				if (!un_login_trigger) {
 					return Promise.reject(err.response);
 				}
-				Router.push({
-					name: "login",
-				});
+				// Router.push({
+				// 	name: "login",
+				// });
 				un_login_trigger = false;
 				break;
 			case 403:
@@ -99,4 +102,4 @@ const post = async function (url: string, data: Object, callback: Function) {
 	callback(response.status, response.data);
 };
 
-export { post, get };
+export { post, get, base_url };

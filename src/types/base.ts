@@ -11,6 +11,7 @@ interface Category {
 	name: string;
 	classNum: number;
 	movieNum: number;
+	main: boolean;
 }
 
 interface Movie {

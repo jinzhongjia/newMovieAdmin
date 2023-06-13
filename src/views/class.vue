@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import { Ref } from "vue";
-import { Class } from "@/types/base";
 import { columns } from "@/data/class";
 import { createPage } from "@/data/tool";
-// debug 导入
-import { randomNum } from "@/mock/tool";
+import { useSourceStore } from "@/store";
 
-//  TODO: debug数据，需要进行处理
-const data: Ref<Class[]> = (() => {
-	let res: Class[] = [];
-	for (let index = 0; index < 20; index++) {
-		res.push({
-			id: index + 1,
-			name: "测试分类" + (index + 1).toString(),
-			isGet: randomNum(0, 20) < 10 ? true : false,
-			categoryId: index + 1,
-		});
-	}
-	return ref(res);
-})();
+const sourceStore = useSourceStore();
+const route = useRoute();
 
-const page = createPage(1, 10, (newval: number) => {
+const data = computed(() =>
+	sourceStore.findClasses(Number(route.params.id as string))
+);
+
+const page = createPage(1, 1, (newval: number) => {
 	page.value.page = newval;
 });
 </script>

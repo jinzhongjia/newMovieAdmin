@@ -10,7 +10,7 @@ const stateStore = useStateStore();
 const data = computed(() => categoryStore.val);
 const categoryModal = computed(() => stateStore.categoryModal);
 
-const page = createPage(1, 10, (newval: number) => {
+const page = createPage(1, 0, (newval: number) => {
 	page.value.page = newval;
 });
 
@@ -21,6 +21,7 @@ const add = () => {
 		name: "",
 		classNum: 0,
 		movieNum: 0,
+		main: true,
 	});
 	categoryModal.value.data = newval;
 	categoryModal.value.new = true;

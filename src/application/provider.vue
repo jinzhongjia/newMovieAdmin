@@ -1,12 +1,11 @@
 <script setup lang="ts">
 // debug导入
-import "@/mock";
+// import "@/mock";
 
 // 该文件作为app下属的父组件，负责部分api的初始化工作
 import Head from "@/components/header.vue";
-import { get_version } from "@/tool/api";
 import { checkMobileMode } from "@/tool/isMobile";
-import { useStateStore } from "@/store";
+import { useStateStore, useSourceStore, init } from "@/store";
 
 import { bindRoute } from "@/data/sider";
 
@@ -32,8 +31,8 @@ const stateStore = useStateStore();
 	window.$message = useMessage();
 })();
 
-// 获取当前的版本号，同时进行是否登陆的验证
-get_version(() => {});
+// store初始化函数
+init();
 
 // 可写计算属性实现类结构操作
 const isMobile = computed({
@@ -123,9 +122,7 @@ onMounted(() => {
 					<div class="box">
 						<router-view v-slot="{ Component }">
 							<keep-alive>
-								<Transition>
-									<component :is="Component" />
-								</Transition>
+								<component :is="Component" />
 							</keep-alive>
 						</router-view>
 					</div>
@@ -140,18 +137,5 @@ onMounted(() => {
 	width: 100%;
 	height: 100%;
 	background-color: white;
-}
-</style>
-
-<style>
-/* 下面我们会解释这些 class 是做什么的 */
-.v-enter-active,
-.v-leave-active {
-	transition: opacity 0.25s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-	opacity: 0;
 }
 </style>

@@ -14,10 +14,14 @@ const remember = ref(false);
 
 function login() {
 	api_login(
-		"",
-		"",
-		function () {},
-		function () {}
+		account.value,
+		password.value,
+		() => {
+			console.log("登陆成功");
+		},
+		() => {
+			console.log("登陆失败");
+		}
 	);
 }
 </script>
