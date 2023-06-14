@@ -2,35 +2,51 @@ import type { DataTableColumns, SelectOption } from "naive-ui";
 import { NSelect, NSwitch } from "naive-ui";
 import { general_render } from "@/data/tool";
 import { Class } from "@/types/base";
+import { useCategoryStore } from "@/store";
+import { change_get_class, distribute_class_category } from "@/tool/api";
 
-const category_debug: SelectOption[] = (() => {
+const categoryStore = useCategoryStore();
+const categories = computed(() => categoryStore.val);
+
+const categoryRef = computed(() => {
 	let res: SelectOption[] = [];
 	res.push({
 		label: "未分类",
 		value: 0,
 	});
-	for (let index = 0; index < 20; index++) {
+	for (let index = 0; index < categories.value.length; index++) {
+		const element = categories.value[index];
 		res.push({
-			label: "分类" + (index + 1).toString(),
-			value: index + 1,
+			label: element.name,
+			value: element.id,
 		});
 	}
 	return res;
-})();
+});
 
 const render_switch = (row: Class, index: number) =>
 	h(NSwitch, {
 		value: row.isGet,
 		onUpdateValue: (value: boolean) => {
-			// TODO: 做相关的able处理
-			row.isGet = !row.isGet;
+			change_get_class(row.id, !row.isGet, () => {
+				row.isGet = !row.isGet;
+			});
 		},
 	});
 
 const render_select = (row: Class, index: number) =>
 	h(NSelect, {
 		value: row.categoryId,
-		options: category_debug,
+		options: categoryRef.value,
+		onUpdateValue: (categoryId: number, option: SelectOption) => {
+			distribute_class_category(
+				row.id,
+				categoryId,
+				(_: number, data: any) => {
+					row.categoryId = categoryId;
+				}
+			);
+		},
 	});
 
 const columns = ref<DataTableColumns<Class>>([

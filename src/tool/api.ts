@@ -307,7 +307,7 @@ const change_get_class = function (
 		"/user/class/changeGet",
 		{
 			id: class_id,
-			get: get,
+			get: get ? "1" : "0",
 		},
 		callback
 	);
@@ -319,7 +319,7 @@ const distribute_class_category = function (
 	callback: (status: number, data: any) => void
 ) {
 	post(
-		"/user/distribute",
+		"/user/class/distribute",
 		{
 			classId: class_id,
 			categoryId: category_id,
