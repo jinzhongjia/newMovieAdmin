@@ -12,15 +12,21 @@ const remember = ref(false);
 	window.$message = useMessage();
 })();
 
+const router = useRouter();
+const message = useMessage();
+
 function login() {
 	api_login(
 		account.value,
 		password.value,
 		() => {
-			console.log("登陆成功");
+			message.success("登陆成功");
+			router.push({
+				name: "dashboard",
+			});
 		},
 		() => {
-			console.log("登陆失败");
+			message.error("登陆失败,请检查账户和密码！");
 		}
 	);
 }

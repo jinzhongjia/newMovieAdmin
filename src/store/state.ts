@@ -4,6 +4,11 @@ import { Source, Category, Movie, Class } from "@/types/base";
 import { formType } from "@/data/form";
 import { defineStore } from "pinia";
 import { Ref, computed } from "vue";
+import { add_source, add_category } from "@/tool/api";
+import { useSourceStore, useCategoryStore } from "@/store";
+
+const sourceStore = useSourceStore();
+const categoryStore = useCategoryStore();
 
 interface modalData {
 	data: Source | Category | Movie;
@@ -14,8 +19,6 @@ interface modalData {
 	close: Function;
 	save: Function;
 }
-
-
 
 const drawerIsActive = ref(false);
 const isMobile = ref(false);
@@ -46,14 +49,15 @@ const sourceModal: Ref<modalData> = ref({
 		sourceModal.value.show = false;
 	},
 	save: () => {
+		const data = computed(() => sourceModal.value.data as Source);
+		const origin = computed(() => sourceModal.value.origin as Source);
 		if (!sourceModal.value.new) {
-			const data = computed(() => sourceModal.value.data as Source);
-			const origin = computed(() => sourceModal.value.origin as Source);
-
 			origin.value.name = data.value.name;
 			origin.value.url = data.value.url;
 		} else {
-			console.log("添加一个东西");
+			add_source(data.value.name, data.value.url, () => {
+				sourceStore.bindSource();
+			});
 		}
 	},
 });
@@ -78,15 +82,14 @@ const categoryModal: Ref<modalData> = ref({
 		categoryModal.value.show = false;
 	},
 	save: () => {
+		const data = computed(() => categoryModal.value.data as Category);
+		const origin = computed(() => categoryModal.value.origin as Category);
 		if (!categoryModal.value.new) {
-			const data = computed(() => categoryModal.value.data as Category);
-			const origin = computed(
-				() => categoryModal.value.origin as Category
-			);
-
 			origin.value.name = data.value.name;
 		} else {
-			console.log("添加一个东西");
+			add_category(data.value.name, (_: number, data: any) => {
+				categoryStore.bindCategory();
+			});
 		}
 	},
 });
@@ -139,8 +142,6 @@ const drawer = ref({
 	val: "" as string,
 	openKeys: [] as string[],
 });
-
-
 
 export const useStateStore = defineStore("state", () => {
 	return {

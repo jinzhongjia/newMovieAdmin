@@ -55,6 +55,9 @@ const isMobile = computed(() => stateStore.isMobile);
 					:data="props.data"
 					:bordered="false"
 					:single-line="false"
+					:min-height="`calc(100vh
+				- 65px - 58px - 5px - 50px ${props.pageCount > 1 ? '- 60px' : ''}
+				)`"
 					:max-height="`calc(100vh
 				- 65px - 58px - 5px - 50px ${props.pageCount > 1 ? '- 60px' : ''}
 				)`"

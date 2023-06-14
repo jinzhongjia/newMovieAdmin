@@ -69,6 +69,16 @@ const findClasses = (id: number) => {
 	return [] as Class[];
 };
 
+const deleteMovie = (id: number) => {
+	for (let index = 0; index < val.value.length; index++) {
+		const element = val.value[index];
+		if (element.info.id == id) {
+			val.value.splice(index, 1);
+			return;
+		}
+	}
+};
+
 export const useSourceStore = defineStore("source", () => {
-	return { val, sources, getClasses, bindSource, findClasses };
+	return { val, sources, getClasses, bindSource, findClasses, deleteMovie };
 });

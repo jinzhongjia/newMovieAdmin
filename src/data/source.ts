@@ -2,8 +2,10 @@ import type { DataTableColumns } from "naive-ui";
 import { NButton, NSpace, NSwitch } from "naive-ui";
 import { Source, cloneSource } from "@/types/base";
 import { general_render } from "@/data/tool";
-import { useStateStore } from "@/store";
+import { useStateStore, useSourceStore } from "@/store";
+import { start, stop, reget_source, del_source } from "@/tool/api";
 
+const sourceStore = useSourceStore();
 const stateStore = useStateStore();
 
 const sourceModal = computed(() => stateStore.sourceModal);
@@ -39,7 +41,11 @@ const general_operate = (row: Source, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						reget_source(row.id, () => {
+							row.progress = false;
+						});
+					},
 				},
 				{ default: () => "重新采集" }
 			),
@@ -50,7 +56,11 @@ const general_operate = (row: Source, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						del_source(row.id, () => {
+							sourceStore.deleteMovie(row.id);
+						});
+					},
 				},
 				{ default: () => "删除" }
 			),
@@ -61,8 +71,17 @@ const render_switch = (row: Source, index: number) =>
 	h(NSwitch, {
 		value: row.able,
 		onUpdateValue: (value: boolean) => {
+			if (row.able) {
+				stop(row.id, () => {
+					row.able = false;
+				});
+			} else {
+				start(row.id, () => {
+					row.able = true;
+				});
+			}
 			// TODO: 做相关的able处理
-			row.able = !row.able;
+			// row.able = !row.able;
 		},
 	});
 
@@ -104,15 +123,6 @@ const columns = ref<DataTableColumns<Source>>([
 		align: "center",
 		width: "100px",
 		render: render_switch,
-		// render(row: Source, index: number) {
-		// 	return h(NSwitch, {
-		// 		value: row.able,
-		// 		onUpdateValue: (value: boolean) => {
-		// 			// TODO: 做相关的able处理
-		// 			row.able = !row.able;
-		// 		},
-		// 	});
-		// },
 	},
 	{
 		title: "操作",

@@ -47,18 +47,6 @@ const save = () => {
 					:placeholder="`输入${ele.label}`"
 				/>
 			</n-form-item>
-			<!-- <n-form-item label="名称" path="props.data.name">
-				<n-input
-					v-model:value="props.data.name"
-					placeholder="输入采集源名称"
-				/>
-			</n-form-item>
-			<n-form-item label="地址" path="props.data.url">
-				<n-input
-					v-model:value="(props.data as Source)['url']"
-					placeholder="输入采集源地址"
-				/>
-			</n-form-item> -->
 		</n-form>
 		<template #footer>
 			<n-space justify="end">

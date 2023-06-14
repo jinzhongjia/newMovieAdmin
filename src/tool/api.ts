@@ -25,27 +25,37 @@ const login = function (
 		});
 };
 
-const get_version = function (callback: Function) {
+const get_version = function (callback: (status: number, data: any) => void) {
 	get("/system/version", callback);
 };
 
-const stop_all = function (callback: Function) {
+const stop_all = function (callback: (status: number, data: any) => void) {
 	get("/user/stop", callback);
 };
 
-const start_all = function (callback: Function) {
+const start_all = function (callback: (status: number, data: any) => void) {
 	get("/user/start", callback);
 };
 
-const stop = function (source_id: number, callback: Function) {
+const stop = function (
+	source_id: number,
+	callback: (status: number, data: any) => void
+) {
 	get("/user/stop/" + String(source_id), callback);
 };
 
-const start = function (source_id: number, callback: Function) {
+const start = function (
+	source_id: number,
+	callback: (status: number, data: any) => void
+) {
 	get("/user/start/" + String(source_id), callback);
 };
 
-const content_list = function (page: number, num: number, callback: Function) {
+const content_list = function (
+	page: number,
+	num: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/list",
 		{
@@ -60,7 +70,7 @@ const search_content = function (
 	keyword: string,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/search",
@@ -73,7 +83,10 @@ const search_content = function (
 	);
 };
 
-const del_content = function (content_id: number, callback: Function) {
+const del_content = function (
+	content_id: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/del",
 		{
@@ -83,7 +96,7 @@ const del_content = function (content_id: number, callback: Function) {
 	);
 };
 
-const count_content = function (callback: Function) {
+const count_content = function (callback: (status: number, data: any) => void) {
 	get("/user/count", callback);
 };
 
@@ -92,7 +105,7 @@ const list_content_source = function (
 	source_id: number,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/source/list",
@@ -110,7 +123,7 @@ const search_content_source = function (
 	keyword: string,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/source/search",
@@ -124,11 +137,15 @@ const search_content_source = function (
 	);
 };
 
-const all_source = function (callback: Function) {
+const all_source = function (callback: (status: number, data: any) => void) {
 	get("/user/source/all", callback);
 };
 
-const add_source = function (name: string, url: string, callback: Function) {
+const add_source = function (
+	name: string,
+	url: string,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/source/add",
 		{
@@ -140,7 +157,10 @@ const add_source = function (name: string, url: string, callback: Function) {
 };
 
 // 重新采集source
-const reget_source = function (source_id: number, callback: Function) {
+const reget_source = function (
+	source_id: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/source/reGet",
 		{
@@ -151,7 +171,10 @@ const reget_source = function (source_id: number, callback: Function) {
 };
 
 // 删除source
-const del_source = function (source_id: number, callback: Function) {
+const del_source = function (
+	source_id: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/source/del",
 		{
@@ -162,7 +185,10 @@ const del_source = function (source_id: number, callback: Function) {
 };
 
 // 获取某个源下的所有采集类
-const all_class_source = function (source_id: number, callback: Function) {
+const all_class_source = function (
+	source_id: number,
+	callback: (status: number, data: any) => void
+) {
 	get("/user/source/all_class/" + String(source_id), callback);
 };
 
@@ -171,7 +197,7 @@ const list_content_category = function (
 	category_id: number,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/category/list",
@@ -189,7 +215,7 @@ const search_content_category = function (
 	keyword: string,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/category/search",
@@ -203,12 +229,15 @@ const search_content_category = function (
 	);
 };
 
-const all_category = function (callback: Function) {
+const all_category = function (callback: (status: number, data: any) => void) {
 	get("/user/category/all", callback);
 };
 
 // 添加自建分类
-const add_category = function (name: string, callback: Function) {
+const add_category = function (
+	name: string,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/category/add",
 		{
@@ -219,7 +248,10 @@ const add_category = function (name: string, callback: Function) {
 };
 
 // 删除自建分类
-const del_category = function (category_id: number, callback: Function) {
+const del_category = function (
+	category_id: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/category/del",
 		{
@@ -233,7 +265,7 @@ const list_content_class = function (
 	class_id: number,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/class/list",
@@ -251,7 +283,7 @@ const search_content_class = function (
 	keyword: string,
 	page: number,
 	num: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/class/search",
@@ -269,7 +301,7 @@ const search_content_class = function (
 const change_get_class = function (
 	class_id: number,
 	get: boolean,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/class/changeGet",
@@ -284,7 +316,7 @@ const change_get_class = function (
 const distribute_class_category = function (
 	class_id: number,
 	category_id: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/distribute",
@@ -296,7 +328,10 @@ const distribute_class_category = function (
 	);
 };
 
-const update_account = function (new_account: string, callback: Function) {
+const update_account = function (
+	new_account: string,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/updateAccount",
 		{
@@ -306,7 +341,10 @@ const update_account = function (new_account: string, callback: Function) {
 	);
 };
 
-const update_password = function (new_password: string, callback: Function) {
+const update_password = function (
+	new_password: string,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/updatePassword",
 		{
@@ -316,13 +354,15 @@ const update_password = function (new_password: string, callback: Function) {
 	);
 };
 
-const get_collect_interval = function (callback: Function) {
+const get_collect_interval = function (
+	callback: (status: number, data: any) => void
+) {
 	get("/user/getCollectInterval", callback);
 };
 
 const update_collect_interval = function (
 	interval: number,
-	callback: Function
+	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/updateCollectInterval",
@@ -333,7 +373,10 @@ const update_collect_interval = function (
 	);
 };
 
-const set_category_main = function (category_id: number, callback: Function) {
+const set_category_main = function (
+	category_id: number,
+	callback: (status: number, data: any) => void
+) {
 	post(
 		"/user/setCategoryMain",
 		{
@@ -343,11 +386,11 @@ const set_category_main = function (category_id: number, callback: Function) {
 	);
 };
 
-const purge_cache = function (callback: Function) {
+const purge_cache = function (callback: (status: number, data: any) => void) {
 	get("/user/cachePurge", callback);
 };
 
-const log_out = function (callback: Function) {
+const log_out = function (callback: (status: number, data: any) => void) {
 	get("/user/logout", callback);
 };
 

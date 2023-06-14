@@ -7,9 +7,13 @@ import {
 } from "@vicons/antd";
 
 import head_img from "@/assets/head-img.svg";
+import { log_out } from "@/tool/api";
+import { getInterval } from "@/data/setting";
 
 const props = defineProps(["isMobile"]);
 const emit = defineEmits(["change"]);
+
+const router = useRouter();
 
 const options = ref([
 	{
@@ -22,9 +26,30 @@ const options = ref([
 	},
 ]);
 
+const handleSelect = (key: string) => {
+	switch (key) {
+		case "logout":
+			log_out(() => {
+				router.push({
+					name: "login",
+				});
+			});
+			break;
+
+		case "front":
+			console.log("跳转到前台首页");
+			break;
+	}
+};
+
 const setting = ref({
 	show: false,
 });
+
+const showModal = () => {
+	setting.value.show = true;
+	getInterval();
+};
 </script>
 <template>
 	<div class="header line general-shadow">
@@ -46,7 +71,11 @@ const setting = ref({
 		</div>
 		<div class="header-right">
 			<div style="padding: 0 12px">
-				<n-dropdown trigger="hover" @select="" :options="options">
+				<n-dropdown
+					trigger="hover"
+					:options="options"
+					@select="handleSelect"
+				>
 					<div class="avatar">
 						<n-avatar round :src="head_img">
 							<template #icon>
@@ -58,7 +87,7 @@ const setting = ref({
 			</div>
 
 			<div style="padding: 0 12px">
-				<n-button quaternary circle @click="setting.show = true">
+				<n-button quaternary circle @click="showModal">
 					<template #icon>
 						<n-icon size="18" :component="SettingOutlined" />
 					</template>

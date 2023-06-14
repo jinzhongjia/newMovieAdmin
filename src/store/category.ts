@@ -20,6 +20,16 @@ const bindCategory = () => {
 	});
 };
 
+const deleteCategory = (id: number) => {
+	for (let index = 0; index < val.value.length; index++) {
+		const element = val.value[index];
+		if (element.id == id) {
+			val.value.splice(index, 1);
+			return;
+		}
+	}
+};
+
 export const useCategoryStore = defineStore("category", () => {
-	return { val, bindCategory };
+	return { val, bindCategory, deleteCategory };
 });

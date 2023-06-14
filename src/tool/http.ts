@@ -44,9 +44,9 @@ base_interceptors.response.use(
 				if (!un_login_trigger) {
 					return Promise.reject(err.response);
 				}
-				// Router.push({
-				// 	name: "login",
-				// });
+				Router.push({
+					name: "login",
+				});
 				un_login_trigger = false;
 				break;
 			case 403:

@@ -2,9 +2,11 @@ import type { DataTableColumns } from "naive-ui";
 import { NButton, NSpace } from "naive-ui";
 import { general_render } from "@/data/tool";
 import { Movie, cloneMovie } from "@/types/base";
-import { useStateStore } from "@/store";
+import { useStateStore, useMovieStore } from "@/store";
+import { del_content } from "@/tool/api";
 
 const stateStore = useStateStore();
+const movieStore = useMovieStore();
 
 const movieModal = computed(() => stateStore.movieModal);
 
@@ -39,7 +41,11 @@ const general_operate = (row: Movie, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						del_content(row.id, (_: number, data: any) => {
+							movieStore.refresh();
+						});
+					},
 				},
 				{ default: () => "删除" }
 			),

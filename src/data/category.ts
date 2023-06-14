@@ -2,8 +2,10 @@ import type { DataTableColumns } from "naive-ui";
 import { NButton, NSpace } from "naive-ui";
 import { general_render } from "@/data/tool";
 import { Category, cloneCategory } from "@/types/base";
-import { useStateStore } from "@/store";
+import { useStateStore, useCategoryStore } from "@/store";
+import { del_category } from "@/tool/api";
 
+const categoryStore = useCategoryStore();
 const stateStore = useStateStore();
 
 const categoryModal = computed(() => stateStore.categoryModal);
@@ -51,7 +53,11 @@ const general_operate = (row: Category, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					onClick: () => {},
+					onClick: () => {
+						del_category(row.id, (_: number, data: any) => {
+							categoryStore.deleteCategory(row.id);
+						});
+					},
 				},
 				{ default: () => "删除" }
 			),

@@ -2,16 +2,48 @@
 import { columns } from "@/data/movies";
 import { useMovieStore, useStateStore } from "@/store";
 import { Movie, cloneMovie } from "@/types/base";
-import { createPage } from "@/data/tool";
+import { RouteRecordName } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 const movieStore = useMovieStore();
 const stateStore = useStateStore();
 
 const data = computed(() => movieStore.val);
 const movieModal = computed(() => stateStore.movieModal);
+const page = computed(() => movieStore.pageRef);
 
-const page = createPage(1, 10, (newval: number) => {
+page.value.update = (newval: number) => {
 	page.value.page = newval;
+	router.push({
+		name: route.name as RouteRecordName,
+		params: {
+			id: route.params.id,
+			page: page.value.page,
+		},
+	});
+};
+
+watchEffect(() => {
+	const pageVal = Number(route.params.page as string);
+	const idVal = Number(route.params.id as string);
+
+	page.value.page = pageVal;
+
+	if (route.name == "movies") {
+		movieStore.bindMovies(pageVal, 20);
+		// 覆盖fresh
+		movieStore.refresh = () => {
+			movieStore.bindMovies(pageVal, 20);
+		};
+	} else if (route.name == "source-movies") {
+		movieStore.bindSourceMovies(idVal, pageVal, 20);
+		// 覆盖fresh
+		movieStore.refresh = () => {
+			movieStore.bindSourceMovies(idVal, pageVal, 20);
+		};
+	}
 });
 
 // debug函数

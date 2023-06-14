@@ -5,7 +5,7 @@
 // 该文件作为app下属的父组件，负责部分api的初始化工作
 import Head from "@/components/header.vue";
 import { checkMobileMode } from "@/tool/isMobile";
-import { useStateStore, useSourceStore, init } from "@/store";
+import { useStateStore, init } from "@/store";
 
 import { bindRoute } from "@/data/sider";
 
@@ -109,7 +109,6 @@ onMounted(() => {
 				<Head :isMobile="isMobile" @change="active = true" />
 			</n-layout-header>
 			<n-layout-content :nativeScrollbar="false">
-				<!-- calc(100vw - 200px) -->
 				<div
 					style="
 						width: 100%;
