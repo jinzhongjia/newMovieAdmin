@@ -9,6 +9,13 @@ import {
 import head_img from "@/assets/head-img.svg";
 import { log_out } from "@/tool/api";
 import { getInterval } from "@/data/setting";
+import { pageNumber } from "@/tool/config";
+import { useMovieStore, useCategoryStore, useSourceStore } from "@/store";
+
+const route = useRoute();
+const movieStore = useMovieStore();
+const categoryStore = useCategoryStore();
+const sourceStore = useSourceStore();
 
 const props = defineProps(["isMobile"]);
 const emit = defineEmits(["change"]);
@@ -37,7 +44,7 @@ const handleSelect = (key: string) => {
 			break;
 
 		case "front":
-			console.log("跳转到前台首页");
+			window.open(window.location.protocol + "//" + window.location.host);
 			break;
 	}
 };
@@ -49,6 +56,32 @@ const setting = ref({
 const showModal = () => {
 	setting.value.show = true;
 	getInterval();
+};
+
+// 刷新按钮执行的函数逻辑处理
+const refresh = () => {
+	const pageVal = Number(route.params.page as string);
+	const idVal = Number(route.params.id as string);
+
+	switch (route.name) {
+		case "source-movies":
+			movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
+			break;
+		case "source-class":
+			sourceStore.bindSource();
+			break;
+		case "dashboard":
+			break;
+		case "source":
+			sourceStore.bindSource();
+			break;
+		case "category":
+			categoryStore.bindCategory();
+			break;
+		case "movies":
+			movieStore.bindMovies(pageVal, pageNumber);
+			break;
+	}
 };
 </script>
 <template>
@@ -62,7 +95,7 @@ const showModal = () => {
 				</n-button>
 			</div>
 			<div style="padding: 0 12px">
-				<n-button quaternary circle>
+				<n-button quaternary circle @click="refresh">
 					<template #icon>
 						<n-icon size="18" :component="ReloadOutlined" />
 					</template>

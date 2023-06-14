@@ -3,6 +3,7 @@ import { columns } from "@/data/movies";
 import { useMovieStore, useStateStore } from "@/store";
 import { Movie, cloneMovie } from "@/types/base";
 import { RouteRecordName } from "vue-router";
+import { pageNumber } from "@/tool/config";
 
 const route = useRoute();
 const router = useRouter();
@@ -32,16 +33,16 @@ watchEffect(() => {
 	page.value.page = pageVal;
 
 	if (route.name == "movies") {
-		movieStore.bindMovies(pageVal, 20);
+		movieStore.bindMovies(pageVal, pageNumber);
 		// 覆盖fresh
 		movieStore.refresh = () => {
-			movieStore.bindMovies(pageVal, 20);
+			movieStore.bindMovies(pageVal, pageNumber);
 		};
 	} else if (route.name == "source-movies") {
-		movieStore.bindSourceMovies(idVal, pageVal, 20);
+		movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
 		// 覆盖fresh
 		movieStore.refresh = () => {
-			movieStore.bindSourceMovies(idVal, pageVal, 20);
+			movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
 		};
 	}
 });
