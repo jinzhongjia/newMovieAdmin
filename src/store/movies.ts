@@ -103,7 +103,8 @@ const bind = (name: string, page: number, id: number, keyword: string) => {
 				bindSourceMovies(id, page, pageNumber);
 			};
 		} else {
-			console.log("执行一次", id, page);
+			// TODO:bug触发，此处需要处理movies的监听问题
+			// console.log("执行一次", id, page);
 			bindSearchSourceMovies(id, page, pageNumber, keyword);
 			// 覆盖fresh
 			refresh = () => {
