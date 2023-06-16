@@ -5,6 +5,28 @@ import { all_category } from "@/tool/api";
 
 const val: Ref<Category[]> = ref([]);
 
+const categories = computed(() => {
+	console.log("测试");
+	let res: Category[] = [];
+	let keyword = categoryKeyword.value.replace(/^\s+|\s+$/g, "");
+	val.value.forEach((instance) => {
+		if (keyword != "") {
+			if (instance.name.indexOf(keyword) > -1) {
+				res.push(instance);
+			}
+		} else {
+			res.push(instance);
+		}
+	});
+	return res;
+});
+
+// 自建分类搜索关键字
+const categoryKeyword = ref("");
+const updatecategoryKeyword = (newVal: string) => {
+	categoryKeyword.value = newVal;
+};
+
 const bindCategory = () => {
 	all_category((_: number, data: any) => {
 		val.value = [];
@@ -31,5 +53,12 @@ const deleteCategory = (id: number) => {
 };
 
 export const useCategoryStore = defineStore("category", () => {
-	return { val, bindCategory, deleteCategory };
+	return {
+		val,
+		categories,
+		bindCategory,
+		deleteCategory,
+		categoryKeyword,
+		updatecategoryKeyword,
+	};
 });

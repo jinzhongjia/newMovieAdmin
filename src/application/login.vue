@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { login as api_login } from "@/tool/api";
+import { login as api_login, silent_version } from "@/tool/api";
 // 存储账户
 const account = ref("");
 // 存储密码
@@ -30,6 +30,14 @@ function login() {
 		}
 	);
 }
+silent_version(
+	() => {
+		router.push({
+			name: "dashboard",
+		});
+	},
+	() => {}
+);
 </script>
 <template>
 	<div class="login-box">
@@ -48,6 +56,7 @@ function login() {
 					type="password"
 					show-password-on="click"
 					placeholder="请输入密码"
+					@keyup.enter="login"
 				/>
 			</div>
 			<div class="login-input">

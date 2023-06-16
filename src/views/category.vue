@@ -7,7 +7,7 @@ import { createPage } from "@/data/tool";
 const categoryStore = useCategoryStore();
 const stateStore = useStateStore();
 
-const data = computed(() => categoryStore.val);
+const data = computed(() => categoryStore.categories);
 const categoryModal = computed(() => stateStore.categoryModal);
 
 const page = createPage(1, 0, (newval: number) => {
@@ -38,6 +38,8 @@ const add = () => {
 		:update="page.update"
 		:add="add"
 		:isAdd="true"
+		:keyword="categoryStore.categoryKeyword"
+		:updateKeyword="categoryStore.updatecategoryKeyword"
 	>
 		<template #extra>
 			<general-form-modal

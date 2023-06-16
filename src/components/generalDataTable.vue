@@ -11,6 +11,8 @@ const props = defineProps([
 	"update",
 	"add",
 	"isAdd",
+	"keyword",
+	"updateKeyword",
 ]);
 
 // 获取store
@@ -18,6 +20,15 @@ const stateStore = useStateStore();
 
 // 通过计算属性进行类结构操作
 const isMobile = computed(() => stateStore.isMobile);
+
+const keyword = computed({
+	get: () => {
+		return props.keyword;
+	},
+	set: (newVal: string) => {
+		props.updateKeyword(newVal);
+	},
+});
 </script>
 <template>
 	<general-render>
@@ -26,7 +37,7 @@ const isMobile = computed(() => stateStore.isMobile);
 		</template>
 		<template #header-extra>
 			<div class="icon-box">
-				<n-input placeholder="搜索" round>
+				<n-input placeholder="搜索" round v-model:value="keyword">
 					<template #prefix>
 						<n-icon :component="Search20Filled" />
 					</template>

@@ -37,4 +37,16 @@ const general_render = (content: string | VNode) =>
 			)
 	);
 
-export { general_render, createPage };
+const debounce = function (excute: Function, delay: number) {
+	let timer: NodeJS.Timeout;
+	return function (this: any, ...args: any) {
+		if (timer) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(() => {
+			excute.apply(this, args);
+		}, delay);
+	};
+};
+
+export { general_render, createPage, debounce };

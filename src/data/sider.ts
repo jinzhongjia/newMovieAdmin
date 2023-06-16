@@ -11,10 +11,11 @@ import { MenuOption, NIcon } from "naive-ui";
 import { Component } from "vue";
 import { Source } from "@/types/base";
 import router from "@/router";
-import { useSourceStore, useStateStore } from "@/store";
+import { useSourceStore, useStateStore, useMovieStore } from "@/store";
 
 const sourceStore = useSourceStore();
 const stateStore = useStateStore();
+const movieStore = useMovieStore();
 
 const value = computed({
 	get: () => stateStore.drawer.val,
@@ -110,6 +111,7 @@ function createMenuOption(arr: Array<Source>): MenuOption[] {
 }
 
 function handleRoute(key: string, item: MenuOption) {
+	movieStore.updatemovieKeyword("");
 	switch (item.type) {
 		case menuType.panel:
 			router.push({

@@ -1,12 +1,12 @@
 import { get, post, base_url } from "@/tool/http";
 import qs from "qs";
 
-const login = function (
+const login = (
 	account: string,
 	password: string,
 	success: Function,
 	fail: Function
-) {
+) => {
 	axios({
 		method: "post",
 		baseURL: base_url,
@@ -16,6 +16,21 @@ const login = function (
 			account,
 			password,
 		}),
+	})
+		.then(function () {
+			success();
+		})
+		.catch(function () {
+			fail();
+		});
+};
+
+const silent_version = (success: Function, fail: Function) => {
+	axios({
+		method: "get",
+		baseURL: base_url,
+		url: "/system/version",
+		headers: { "content-type": "application/x-www-form-urlencoded" },
 	})
 		.then(function () {
 			success();
@@ -397,6 +412,7 @@ const log_out = function (callback: (status: number, data: any) => void) {
 // 导出api函数
 export {
 	login,
+	silent_version,
 	get_version,
 	stop_all,
 	start_all,

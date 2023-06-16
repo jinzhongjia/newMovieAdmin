@@ -38,6 +38,8 @@ const add = () => {
 		:update="page.update"
 		:add="add"
 		:isAdd="true"
+		:keyword="sourceStore.sourceKeyword"
+		:updateKeyword="sourceStore.updatesourceKeyword"
 	>
 		<template #extra>
 			<general-form-modal

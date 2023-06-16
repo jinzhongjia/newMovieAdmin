@@ -6,8 +6,8 @@ import { useSourceStore } from "@/store";
 const sourceStore = useSourceStore();
 const route = useRoute();
 
-const data = computed(() =>
-	sourceStore.findClasses(Number(route.params.id as string))
+const data = computed(
+	() => sourceStore.getClasses(Number(route.params.id as string)).value
 );
 
 const page = createPage(1, 1, (newval: number) => {
@@ -23,6 +23,8 @@ const page = createPage(1, 1, (newval: number) => {
 		:pageCount="page.pageCount"
 		:update="page.update"
 		:isAdd="false"
+		:keyword="sourceStore.classKeyword"
+		:updateKeyword="sourceStore.updateclassKeyword"
 	></general-data-table>
 </template>
 <style scoped></style>

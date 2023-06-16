@@ -3,7 +3,6 @@ import { columns } from "@/data/movies";
 import { useMovieStore, useStateStore } from "@/store";
 import { Movie, cloneMovie } from "@/types/base";
 import { RouteRecordName } from "vue-router";
-import { pageNumber } from "@/tool/config";
 
 const route = useRoute();
 const router = useRouter();
@@ -27,25 +26,29 @@ page.value.update = (newval: number) => {
 };
 
 watchEffect(() => {
+
+	const name = route.name as string;
 	const pageVal = Number(route.params.page as string);
 	const idVal = Number(route.params.id as string);
+	const keyword = movieStore.movieKeyword;
 
 	page.value.page = pageVal;
 
-	if (route.name == "movies") {
-		movieStore.bindMovies(pageVal, pageNumber);
-		// 覆盖fresh
-		movieStore.refresh = () => {
-			movieStore.bindMovies(pageVal, pageNumber);
-		};
-	} else if (route.name == "source-movies") {
-		movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
-		// 覆盖fresh
-		movieStore.refresh = () => {
-			movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
-		};
-	}
+	movieStore.bind(name, pageVal, idVal, keyword);
 });
+
+watch(
+	() => movieStore.movieKeyword,
+	(newVal, oldVal) => {
+		router.push({
+			name: route.name as string,
+			params: {
+				id: route.params.id,
+				page: 1,
+			},
+		});
+	}
+);
 
 // debug函数
 const add = () => {
@@ -74,6 +77,8 @@ const add = () => {
 		:update="page.update"
 		:add="add"
 		:isAdd="true"
+		:keyword="movieStore.movieKeyword"
+		:updateKeyword="movieStore.updatemovieKeyword"
 	>
 		<template #extra>
 			<general-form-modal
