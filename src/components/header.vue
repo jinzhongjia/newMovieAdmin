@@ -9,7 +9,6 @@ import {
 import head_img from "@/assets/head-img.svg";
 import { log_out } from "@/tool/api";
 import { getInterval } from "@/data/setting";
-import { pageNumber } from "@/tool/config";
 import { useMovieStore, useCategoryStore, useSourceStore } from "@/store";
 
 const route = useRoute();
@@ -62,10 +61,11 @@ const showModal = () => {
 const refresh = () => {
 	const pageVal = Number(route.params.page as string);
 	const idVal = Number(route.params.id as string);
+	const keyword = movieStore.movieKeyword;
 
 	switch (route.name) {
 		case "source-movies":
-			movieStore.bindSourceMovies(idVal, pageVal, pageNumber);
+			movieStore.bind(route.name, pageVal, idVal, keyword);
 			break;
 		case "source-class":
 			sourceStore.bindSource();
@@ -79,7 +79,7 @@ const refresh = () => {
 			categoryStore.bindCategory();
 			break;
 		case "movies":
-			movieStore.bindMovies(pageVal, pageNumber);
+			movieStore.bind(route.name, pageVal, idVal, keyword);
 			break;
 	}
 };
