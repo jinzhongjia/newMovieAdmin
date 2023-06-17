@@ -18,22 +18,23 @@ const general_operate = (row: Source, index: number) =>
 			justify: "center",
 		},
 		() => [
-			h(
-				NButton,
-				{
-					type: "primary",
-					strong: true,
-					size: "small",
-					secondary: true,
-					onClick: () => {
-						sourceModal.value.data = cloneSource(row);
-						sourceModal.value.origin = row;
-						sourceModal.value.new = false;
-						sourceModal.value.show = true;
-					},
-				},
-				{ default: () => "修改" }
-			),
+			// TODO,待取消注释
+			// h(
+			// 	NButton,
+			// 	{
+			// 		type: "primary",
+			// 		strong: true,
+			// 		size: "small",
+			// 		secondary: true,
+			// 		onClick: () => {
+			// 			sourceModal.value.data = cloneSource(row);
+			// 			sourceModal.value.origin = row;
+			// 			sourceModal.value.new = false;
+			// 			sourceModal.value.show = true;
+			// 		},
+			// 	},
+			// 	{ default: () => "修改" }
+			// ),
 			h(
 				NButton,
 				{
@@ -80,8 +81,6 @@ const render_switch = (row: Source, index: number) =>
 					row.able = true;
 				});
 			}
-			// TODO: 做相关的able处理
-			// row.able = !row.able;
 		},
 	});
 

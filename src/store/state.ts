@@ -6,6 +6,7 @@ import { defineStore } from "pinia";
 import { Ref, computed } from "vue";
 import { add_source, add_category } from "@/tool/api";
 import { useSourceStore, useCategoryStore } from "@/store";
+import { asyncMutexBuild } from "@/data/tool";
 
 const sourceStore = useSourceStore();
 const categoryStore = useCategoryStore();
@@ -51,9 +52,25 @@ const sourceModal: Ref<modalData> = ref({
 	save: () => {
 		const data = computed(() => sourceModal.value.data as Source);
 		const origin = computed(() => sourceModal.value.origin as Source);
+		console.log(sourceModal.value.new);
 		if (!sourceModal.value.new) {
-			origin.value.name = data.value.name;
-			origin.value.url = data.value.url;
+			let num = 0;
+			if (origin.value.name != data.value.name) {
+				num++;
+			}
+			if (origin.value.url != data.value.url) {
+				num++;
+			}
+			const syncFn = asyncMutexBuild(num, () => {
+				origin.value.name = data.value.name;
+				origin.value.url = data.value.url;
+			});
+			if (origin.value.name != data.value.name) {
+				// 此处执行更新请求，并将syncfn塞入回调中
+			}
+			if (origin.value.url != data.value.url) {
+				// 此处执行更新请求，并将syncfn塞入回调中
+			}
 		} else {
 			add_source(data.value.name, data.value.url, () => {
 				sourceStore.bindSource();

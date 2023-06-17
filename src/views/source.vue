@@ -14,7 +14,6 @@ const page = createPage(1, 1, (newval: number) => {
 	page.value.page = newval;
 });
 
-// debug函数
 const add = () => {
 	let newval: Source = cloneSource({
 		id: -1,
@@ -43,7 +42,7 @@ const add = () => {
 	>
 		<template #extra>
 			<general-form-modal
-				title="采集源测试"
+				title="采集源"
 				:data="sourceModal.data"
 				:show="sourceModal.show"
 				:type="sourceModal.type"

@@ -50,7 +50,6 @@ watch(
 	}
 );
 
-// debug函数
 const add = () => {
 	let newval: Movie = cloneMovie({
 		id: -1,
@@ -82,7 +81,7 @@ const add = () => {
 	>
 		<template #extra>
 			<general-form-modal
-				title="影片测试"
+				title="影片"
 				:data="movieModal.data"
 				:show="movieModal.show"
 				:type="movieModal.type"

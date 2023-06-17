@@ -3,7 +3,7 @@ import { NButton, NSpace } from "naive-ui";
 import { general_render } from "@/data/tool";
 import { Category, cloneCategory } from "@/types/base";
 import { useStateStore, useCategoryStore } from "@/store";
-import { del_category } from "@/tool/api";
+import { del_category, set_category_main } from "@/tool/api";
 
 const categoryStore = useCategoryStore();
 const stateStore = useStateStore();
@@ -18,22 +18,23 @@ const general_operate = (row: Category, index: number) =>
 			justify: "center",
 		},
 		() => [
-			h(
-				NButton,
-				{
-					type: "primary",
-					strong: true,
-					size: "small",
-					secondary: true,
-					onClick: () => {
-						categoryModal.value.data = cloneCategory(row);
-						categoryModal.value.origin = row;
-						categoryModal.value.new = false;
-						categoryModal.value.show = true;
-					},
-				},
-				{ default: () => "修改" }
-			),
+			// TODO,待取消注释
+			// h(
+			// 	NButton,
+			// 	{
+			// 		type: "primary",
+			// 		strong: true,
+			// 		size: "small",
+			// 		secondary: true,
+			// 		onClick: () => {
+			// 			categoryModal.value.data = cloneCategory(row);
+			// 			categoryModal.value.origin = row;
+			// 			categoryModal.value.new = false;
+			// 			categoryModal.value.show = true;
+			// 		},
+			// 	},
+			// 	{ default: () => "修改" }
+			// ),
 			h(
 				NButton,
 				{
@@ -41,10 +42,15 @@ const general_operate = (row: Category, index: number) =>
 					strong: true,
 					size: "small",
 					secondary: true,
-					disabled: row.main,
-					onClick: () => {},
+					// disabled: row.main,
+					onClick: () => {
+						console.log(row.main);
+						set_category_main(row.id, !row.main, () => {
+							row.main = !row.main;
+						});
+					},
 				},
-				{ default: () => "设为主分类" }
+				{ default: () => (row.main ? "取消主分类" : "设为主分类") }
 			),
 			h(
 				NButton,

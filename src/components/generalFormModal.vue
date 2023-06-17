@@ -25,8 +25,9 @@ const close = () => {
 
 // 包裹外部的函数，获得内部保存函数
 const save = () => {
-	emit("close");
+	// 此处并不应该触发关闭，应该由回调执行
 	emit("save");
+	emit("close");
 };
 </script>
 <template>

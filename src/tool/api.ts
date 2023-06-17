@@ -390,12 +390,14 @@ const update_collect_interval = function (
 
 const set_category_main = function (
 	category_id: number,
+	main: boolean,
 	callback: (status: number, data: any) => void
 ) {
 	post(
 		"/user/setCategoryMain",
 		{
 			id: category_id,
+			main: main ? "true" : "false",
 		},
 		callback
 	);

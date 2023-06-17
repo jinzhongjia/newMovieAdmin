@@ -49,4 +49,14 @@ const debounce = function (excute: Function, delay: number) {
 	};
 };
 
-export { general_render, createPage, debounce };
+const asyncMutexBuild = function (num: number, fn: Function) {
+	let i = 0;
+	return function (this: any, ...args: any) {
+		i++;
+		if (i == num) {
+			fn.apply(this, args);
+		}
+	};
+};
+
+export { general_render, createPage, debounce, asyncMutexBuild };

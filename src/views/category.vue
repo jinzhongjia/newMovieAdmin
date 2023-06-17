@@ -14,7 +14,6 @@ const page = createPage(1, 0, (newval: number) => {
 	page.value.page = newval;
 });
 
-// debug函数
 const add = () => {
 	let newval: Category = cloneCategory({
 		id: -1,
@@ -43,7 +42,7 @@ const add = () => {
 	>
 		<template #extra>
 			<general-form-modal
-				title="分类测试"
+				title="分类"
 				:data="categoryModal.data"
 				:show="categoryModal.show"
 				:type="categoryModal.type"

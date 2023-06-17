@@ -55,14 +55,15 @@ const emit = defineEmits(["close"]);
 				<n-button @click="UpdateInterval">更新</n-button>
 			</n-space>
 		</n-card>
-		<n-card :bordered="false" title="缓存时间:" size="small">
+		<n-card :bordered="false" title="缓存:" size="small">
 			<n-space>
-				<n-input-number
+				<!-- TODO:待取消注释 -->
+				<!-- <n-input-number
 					v-model:value="cacheTime"
 					:loading="cacheLoading"
 					clearable
 				/>
-				<n-button @click="">更新</n-button>
+				<n-button @click="">更新</n-button> -->
 				<n-button @click="purgeCache">清空缓存</n-button>
 			</n-space>
 		</n-card>
