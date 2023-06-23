@@ -151,7 +151,7 @@ const refresh = () => {
 }
 .line {
 	border-style: solid;
-	border-width: 0 0 1px 0;
-	border-color: #e8ecee;
+	border-width: 0 0 thin 0;
+	border-color: #efeff5;
 }
 </style>

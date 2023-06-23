@@ -7,6 +7,7 @@ let base_url: string;
 
 if (import.meta.env.DEV) {
 	base_url = "http://localhost:8000";
+	// base_url = "https://movie.demo.nvimer.org";
 } else {
 	base_url = window.location.protocol + "//" + window.location.host;
 }
@@ -26,7 +27,6 @@ const base_interceptors = base_http.interceptors;
 // 请求拦截
 base_interceptors.request.use();
 
-let un_login_trigger: boolean = true;
 // 响应拦截
 base_interceptors.response.use(
 	(res: AxiosResponse) => {
@@ -41,13 +41,9 @@ base_interceptors.response.use(
 				break;
 			case 401:
 				message = "未授权，请重新登录(401)";
-				if (!un_login_trigger) {
-					return Promise.reject(err.response);
-				}
 				Router.push({
 					name: "login",
 				});
-				un_login_trigger = false;
 				break;
 			case 403:
 				message = "拒绝访问(403)，请登陆";

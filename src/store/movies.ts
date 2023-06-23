@@ -12,6 +12,15 @@ import { pageNumber } from "@/tool/config";
 
 const val: Ref<Movie[]> = ref([]);
 
+const loading = ref(true);
+
+const load_ok = () => {
+	loading.value = false;
+};
+const load_not_ok = () => {
+	loading.value = true;
+};
+
 /**
  * 清空movies
  */
@@ -46,20 +55,26 @@ const handleMovies = (data: any) => {
 };
 
 const bindMovies = (page: number, count: number) => {
+	load_not_ok();
 	content_list(page, count, (_: number, data: any) => {
 		handleMovies(data);
+		load_ok();
 	});
 };
 
 const bindSearchMovies = (page: number, count: number, keyword: string) => {
+	load_not_ok();
 	search_content(keyword, page, count, (_: number, data: any) => {
 		handleMovies(data);
+		load_ok();
 	});
 };
 
 const bindSourceMovies = (sourceId: number, page: number, count: number) => {
+	load_not_ok();
 	list_content_source(sourceId, page, count, (_: number, data: any) => {
 		handleMovies(data);
+		load_ok();
 	});
 };
 
@@ -69,6 +84,7 @@ const bindSearchSourceMovies = (
 	count: number,
 	keyword: string
 ) => {
+	load_not_ok();
 	search_content_source(
 		sourceId,
 		keyword,
@@ -76,6 +92,7 @@ const bindSearchSourceMovies = (
 		count,
 		(_: number, data: any) => {
 			handleMovies(data);
+			load_ok();
 		}
 	);
 };
@@ -129,5 +146,8 @@ export const useMovieStore = defineStore("movie", () => {
 		bindSearchMovies,
 		bindSearchSourceMovies,
 		bind,
+		loading,
+		load_ok,
+		load_not_ok,
 	};
 });

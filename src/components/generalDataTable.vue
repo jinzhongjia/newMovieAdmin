@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { AddCircle24Regular, Search20Filled } from "@vicons/fluent";
-import { useStateStore } from "@/store";
+import { useMovieStore, useStateStore } from "@/store";
 
 const props = defineProps([
 	"title",
@@ -17,6 +17,9 @@ const props = defineProps([
 
 // 获取store
 const stateStore = useStateStore();
+const movieStore = useMovieStore();
+
+const route = useRoute();
 
 // 通过计算属性进行类结构操作
 const isMobile = computed(() => stateStore.isMobile);
@@ -72,6 +75,11 @@ const keyword = computed({
 					:max-height="`calc(100vh
 				- 65px - 58px - 5px - 50px ${props.pageCount > 1 ? '- 60px' : ''}
 				)`"
+					:loading="
+						route.name == `movies` || route.name == `source-movies`
+							? movieStore.loading
+							: false
+					"
 				/>
 			</n-scrollbar>
 		</n-scrollbar>
@@ -101,5 +109,6 @@ const keyword = computed({
 	justify-content: center;
 	align-items: center;
 	height: 58px;
+	background-color: inherit;
 }
 </style>

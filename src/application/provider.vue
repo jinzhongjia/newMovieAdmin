@@ -3,6 +3,7 @@
 // import "@/mock";
 
 // 该文件作为app下属的父组件，负责部分api的初始化工作
+import { loading_status, loading_ok } from "@/tool/loading";
 import Head from "@/components/header.vue";
 import { checkMobileMode } from "@/tool/isMobile";
 import { useStateStore, init } from "@/store";
@@ -32,7 +33,7 @@ const stateStore = useStateStore();
 })();
 
 // store初始化函数
-init();
+init(loading_ok);
 
 // 可写计算属性实现类结构操作
 const isMobile = computed({
@@ -65,7 +66,15 @@ onMounted(() => {
 </script>
 
 <template>
-	<n-layout :has-sider="!isMobile">
+	<template v-if="loading_status">
+		<div id="loading-container">
+			<n-spin size="large">
+				<template #description> 加载中 </template>
+			</n-spin>
+		</div>
+	</template>
+
+	<n-layout v-else :has-sider="!isMobile">
 		<n-drawer
 			v-model:show="active"
 			:width="200"
@@ -113,7 +122,7 @@ onMounted(() => {
 					style="
 						width: 100%;
 						height: calc(100vh - 65px);
-						background-color: #f5f7f9;
+						/* background-color: #f5f7f9; */
 						padding: 5px 0px 0px 0px;
 						box-sizing: border-box;
 					"
@@ -135,6 +144,7 @@ onMounted(() => {
 .box {
 	width: 100%;
 	height: 100%;
-	background-color: white;
+	/* background-color: white; */
+	background-color: inherit;
 }
 </style>

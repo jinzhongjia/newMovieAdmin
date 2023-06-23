@@ -9,12 +9,13 @@ const sourceStore = useSourceStore();
 const categoryStore = useCategoryStore();
 
 // 初始化函数，用于初始化store
-const init = () => {
+const init = (callback: Function) => {
 	// 获取当前的版本号，同时进行是否登陆的验证
 	get_version((_: number, data: string) => {
 		console.log("Version:" + data);
 		sourceStore.bindSource();
 		categoryStore.bindCategory();
+		callback();
 	});
 };
 
