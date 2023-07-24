@@ -4,7 +4,12 @@ import { Source, Category, Movie, Class } from "@/types/base";
 import { formType } from "@/data/form";
 import { defineStore } from "pinia";
 import { Ref, computed } from "vue";
-import { add_source, add_category } from "@/tool/api";
+import {
+	add_source,
+	add_category,
+	rename_source,
+	reurl_source,
+} from "@/tool/api";
 import { useSourceStore, useCategoryStore } from "@/store";
 import { asyncMutexBuild } from "@/data/tool";
 
@@ -66,10 +71,10 @@ const sourceModal: Ref<modalData> = ref({
 				origin.value.url = data.value.url;
 			});
 			if (origin.value.name != data.value.name) {
-				// 此处执行更新请求，并将syncfn塞入回调中
+				rename_source(origin.value.id, data.value.name, () => syncFn());
 			}
 			if (origin.value.url != data.value.url) {
-				// 此处执行更新请求，并将syncfn塞入回调中
+				reurl_source(origin.value.id, data.value.url, () => syncFn());
 			}
 		} else {
 			add_source(data.value.name, data.value.url, () => {

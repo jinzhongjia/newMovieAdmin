@@ -156,6 +156,7 @@ const all_source = function (callback: (status: number, data: any) => void) {
 	get("/user/source/all", callback);
 };
 
+// 添加source
 const add_source = function (
 	name: string,
 	url: string,
@@ -180,6 +181,36 @@ const reget_source = function (
 		"/user/source/reGet",
 		{
 			id: source_id,
+		},
+		callback
+	);
+};
+
+const rename_source = function (
+	source_id: number,
+	name: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/source/reName",
+		{
+			id: source_id,
+			name: name,
+		},
+		callback
+	);
+};
+
+const reurl_source = function (
+	source_id: number,
+	url: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/source/reUrl",
+		{
+			id: source_id,
+			url: url,
 		},
 		callback
 	);
@@ -250,6 +281,20 @@ const all_category = function (callback: (status: number, data: any) => void) {
 
 // 添加自建分类
 const add_category = function (
+	name: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/category/add",
+		{
+			name: name,
+		},
+		callback
+	);
+};
+
+// 添加自建分类
+const rename_category = function (
 	name: string,
 	callback: (status: number, data: any) => void
 ) {
@@ -428,6 +473,8 @@ export {
 	search_content_source,
 	all_source,
 	add_source,
+	rename_source,
+	reurl_source,
 	reget_source,
 	del_source,
 	all_class_source,

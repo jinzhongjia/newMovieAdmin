@@ -18,23 +18,22 @@ const general_operate = (row: Source, index: number) =>
 			justify: "center",
 		},
 		() => [
-			// TODO,待取消注释
-			// h(
-			// 	NButton,
-			// 	{
-			// 		type: "primary",
-			// 		strong: true,
-			// 		size: "small",
-			// 		secondary: true,
-			// 		onClick: () => {
-			// 			sourceModal.value.data = cloneSource(row);
-			// 			sourceModal.value.origin = row;
-			// 			sourceModal.value.new = false;
-			// 			sourceModal.value.show = true;
-			// 		},
-			// 	},
-			// 	{ default: () => "修改" }
-			// ),
+			h(
+				NButton,
+				{
+					type: "primary",
+					strong: true,
+					size: "small",
+					secondary: true,
+					onClick: () => {
+						sourceModal.value.data = cloneSource(row);
+						sourceModal.value.origin = row;
+						sourceModal.value.new = false;
+						sourceModal.value.show = true;
+					},
+				},
+				{ default: () => "修改" }
+			),
 			h(
 				NButton,
 				{
