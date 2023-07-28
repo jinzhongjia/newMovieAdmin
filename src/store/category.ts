@@ -6,7 +6,6 @@ import { all_category } from "@/tool/api";
 const val: Ref<Category[]> = ref([]);
 
 const categories = computed(() => {
-	console.log("测试");
 	let res: Category[] = [];
 	let keyword = categoryKeyword.value.replace(/^\s+|\s+$/g, "");
 	val.value.forEach((instance) => {

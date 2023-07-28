@@ -98,6 +98,106 @@ const search_content = function (
 	);
 };
 
+const rename_content = function (
+	content_id: number,
+	name: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/rename",
+		{
+			id: content_id,
+			name: name,
+		},
+		callback
+	);
+};
+
+const repic_content = function (
+	content_id: number,
+	pic: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/repic",
+		{
+			id: content_id,
+			pic: pic,
+		},
+		callback
+	);
+};
+const reactor_content = function (
+	content_id: number,
+	actor: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/reactor",
+		{
+			id: content_id,
+			actor: actor,
+		},
+		callback
+	);
+};
+const redirector_content = function (
+	content_id: number,
+	director: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/redirector",
+		{
+			id: content_id,
+			director: director,
+		},
+		callback
+	);
+};
+const reduration_content = function (
+	content_id: number,
+	duration: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/reduration",
+		{
+			id: content_id,
+			duration: duration,
+		},
+		callback
+	);
+};
+const redesc_content = function (
+	content_id: number,
+	description: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/redesc",
+		{
+			id: content_id,
+			description: description,
+		},
+		callback
+	);
+};
+const reurl_content = function (
+	content_id: number,
+	url: string,
+	callback: (status: number, data: any) => void
+) {
+	post(
+		"/user/content/reurl",
+		{
+			id: content_id,
+			url: url,
+		},
+		callback
+	);
+};
+
 const del_content = function (
 	content_id: number,
 	callback: (status: number, data: any) => void
@@ -295,12 +395,14 @@ const add_category = function (
 
 // 添加自建分类
 const rename_category = function (
+	category_id: number,
 	name: string,
 	callback: (status: number, data: any) => void
 ) {
 	post(
-		"/user/category/add",
+		"/user/category/reName",
 		{
+			id:category_id,
 			name: name,
 		},
 		callback
@@ -468,6 +570,13 @@ export {
 	content_list,
 	search_content,
 	count_content,
+	rename_content,
+	repic_content,
+	reactor_content,
+	redirector_content,
+	reduration_content,
+	redesc_content,
+	reurl_content,
 	del_content,
 	list_content_source,
 	search_content_source,
@@ -482,6 +591,7 @@ export {
 	search_content_category,
 	all_category,
 	add_category,
+	rename_category,
 	del_category,
 	list_content_class,
 	search_content_class,

@@ -19,22 +19,22 @@ const general_operate = (row: Category, index: number) =>
 		},
 		() => [
 			// TODO,待取消注释
-			// h(
-			// 	NButton,
-			// 	{
-			// 		type: "primary",
-			// 		strong: true,
-			// 		size: "small",
-			// 		secondary: true,
-			// 		onClick: () => {
-			// 			categoryModal.value.data = cloneCategory(row);
-			// 			categoryModal.value.origin = row;
-			// 			categoryModal.value.new = false;
-			// 			categoryModal.value.show = true;
-			// 		},
-			// 	},
-			// 	{ default: () => "修改" }
-			// ),
+			h(
+				NButton,
+				{
+					type: "primary",
+					strong: true,
+					size: "small",
+					secondary: true,
+					onClick: () => {
+						categoryModal.value.data = cloneCategory(row);
+						categoryModal.value.origin = row;
+						categoryModal.value.new = false;
+						categoryModal.value.show = true;
+					},
+				},
+				{ default: () => "修改" }
+			),
 			h(
 				NButton,
 				{

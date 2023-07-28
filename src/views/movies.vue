@@ -75,7 +75,7 @@ const add = () => {
 		:pageCount="page.pageCount"
 		:update="page.update"
 		:add="add"
-		:isAdd="true"
+		:isAdd="false"
 		:keyword="movieStore.movieKeyword"
 		:updateKeyword="movieStore.updatemovieKeyword"
 	>

@@ -1,6 +1,6 @@
 // 此处定义状态
 
-import { Source, Category, Movie, Class } from "@/types/base";
+import { Source, Category, Movie } from "@/types/base";
 import { formType } from "@/data/form";
 import { defineStore } from "pinia";
 import { Ref, computed } from "vue";
@@ -9,6 +9,14 @@ import {
 	add_category,
 	rename_source,
 	reurl_source,
+	rename_category,
+	rename_content,
+	repic_content,
+	reactor_content,
+	redirector_content,
+	reduration_content,
+	redesc_content,
+	reurl_content,
 } from "@/tool/api";
 import { useSourceStore, useCategoryStore } from "@/store";
 import { asyncMutexBuild } from "@/data/tool";
@@ -71,10 +79,10 @@ const sourceModal: Ref<modalData> = ref({
 				origin.value.url = data.value.url;
 			});
 			if (origin.value.name != data.value.name) {
-				rename_source(origin.value.id, data.value.name, () => syncFn());
+				rename_source(origin.value.id, data.value.name, syncFn);
 			}
 			if (origin.value.url != data.value.url) {
-				reurl_source(origin.value.id, data.value.url, () => syncFn());
+				reurl_source(origin.value.id, data.value.url, syncFn);
 			}
 		} else {
 			add_source(data.value.name, data.value.url, () => {
@@ -107,7 +115,9 @@ const categoryModal: Ref<modalData> = ref({
 		const data = computed(() => categoryModal.value.data as Category);
 		const origin = computed(() => categoryModal.value.origin as Category);
 		if (!categoryModal.value.new) {
-			origin.value.name = data.value.name;
+			rename_category(origin.value.id, data.value.name, () => {
+				origin.value.name = data.value.name;
+			});
 		} else {
 			add_category(data.value.name, (_: number, data: any) => {
 				categoryStore.bindCategory();
@@ -147,13 +157,55 @@ const movieModal: Ref<modalData> = ref({
 		if (!movieModal.value.new) {
 			const data = computed(() => movieModal.value.data as Movie);
 			const origin = computed(() => movieModal.value.origin as Movie);
-			origin.value.name = data.value.name;
-			origin.value.director = data.value.director;
-			origin.value.actor = data.value.actor;
-			origin.value.duration = data.value.duration;
-			origin.value.description = data.value.description;
-			origin.value.pic = data.value.pic;
-			origin.value.url = data.value.url;
+
+			let num = 0;
+			{
+				if (origin.value.name != data.value.name) num++;
+				if (origin.value.pic != data.value.pic) num++;
+				if (origin.value.actor != data.value.actor) num++;
+				if (origin.value.director != data.value.director) num++;
+				if (origin.value.duration != data.value.duration) num++;
+				if (origin.value.description != data.value.description) num++;
+				if (origin.value.url != data.value.url) num++;
+			}
+
+			const syncFn = asyncMutexBuild(num, () => {
+				origin.value.name = data.value.name;
+				origin.value.pic = data.value.pic;
+				origin.value.actor = data.value.actor;
+				origin.value.director = data.value.director;
+				origin.value.duration = data.value.duration;
+				origin.value.description = data.value.description;
+				origin.value.url = data.value.url;
+			});
+			{
+				if (origin.value.name != data.value.name)
+					rename_content(origin.value.id, data.value.name, syncFn);
+				if (origin.value.pic != data.value.pic)
+					repic_content(origin.value.id, data.value.pic, syncFn);
+				if (origin.value.actor != data.value.actor)
+					reactor_content(origin.value.id, data.value.actor, syncFn);
+				if (origin.value.director != data.value.director)
+					redirector_content(
+						origin.value.id,
+						data.value.director,
+						syncFn
+					);
+				if (origin.value.duration != data.value.duration)
+					reduration_content(
+						origin.value.id,
+						data.value.duration,
+						syncFn
+					);
+				if (origin.value.description != data.value.description)
+					redesc_content(
+						origin.value.id,
+						data.value.description,
+						syncFn
+					);
+				if (origin.value.url != data.value.url)
+					reurl_content(origin.value.id, data.value.url, syncFn);
+			}
 		} else {
 			console.log("添加一个东西");
 		}
