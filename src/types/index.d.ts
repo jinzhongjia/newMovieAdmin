@@ -1,9 +1,9 @@
-import { MessageApiInjection } from "naive-ui/es/message/src/MessageProvider";
+import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider'
 
-export {};
+export {}
 
 declare global {
-	interface Window {
-		$message: MessageApiInjection;
-	}
+    interface Window {
+        $message: MessageApiInjection
+    }
 }

@@ -1,4 +1,4 @@
 // debug引入
-import "@/mock/data";
+import '@/mock/data'
 
-export { randomNum } from "@/mock/tool";
+export { randomNum } from '@/mock/tool'
