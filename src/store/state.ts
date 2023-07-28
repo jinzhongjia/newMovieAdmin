@@ -62,10 +62,9 @@ const sourceModal: Ref<modalData> = ref({
 	close: () => {
 		sourceModal.value.show = false;
 	},
-	save: () => {
+	save: (callback:Function) => {
 		const data = computed(() => sourceModal.value.data as Source);
 		const origin = computed(() => sourceModal.value.origin as Source);
-		console.log(sourceModal.value.new);
 		if (!sourceModal.value.new) {
 			let num = 0;
 			if (origin.value.name != data.value.name) {
@@ -77,6 +76,7 @@ const sourceModal: Ref<modalData> = ref({
 			const syncFn = asyncMutexBuild(num, () => {
 				origin.value.name = data.value.name;
 				origin.value.url = data.value.url;
+				callback()
 			});
 			if (origin.value.name != data.value.name) {
 				rename_source(origin.value.id, data.value.name, syncFn);
@@ -87,6 +87,7 @@ const sourceModal: Ref<modalData> = ref({
 		} else {
 			add_source(data.value.name, data.value.url, () => {
 				sourceStore.bindSource();
+				callback();
 			});
 		}
 	},
@@ -111,16 +112,18 @@ const categoryModal: Ref<modalData> = ref({
 	close: () => {
 		categoryModal.value.show = false;
 	},
-	save: () => {
+	save: (callback: Function) => {
 		const data = computed(() => categoryModal.value.data as Category);
 		const origin = computed(() => categoryModal.value.origin as Category);
 		if (!categoryModal.value.new) {
 			rename_category(origin.value.id, data.value.name, () => {
 				origin.value.name = data.value.name;
+				callback()
 			});
 		} else {
 			add_category(data.value.name, (_: number, data: any) => {
 				categoryStore.bindCategory();
+				callback();
 			});
 		}
 	},
@@ -153,7 +156,7 @@ const movieModal: Ref<modalData> = ref({
 	close: () => {
 		movieModal.value.show = false;
 	},
-	save: () => {
+	save: (callback: Function) => {
 		if (!movieModal.value.new) {
 			const data = computed(() => movieModal.value.data as Movie);
 			const origin = computed(() => movieModal.value.origin as Movie);
@@ -177,6 +180,7 @@ const movieModal: Ref<modalData> = ref({
 				origin.value.duration = data.value.duration;
 				origin.value.description = data.value.description;
 				origin.value.url = data.value.url;
+				callback()
 			});
 			{
 				if (origin.value.name != data.value.name)
@@ -208,6 +212,7 @@ const movieModal: Ref<modalData> = ref({
 			}
 		} else {
 			console.log("添加一个东西");
+			// 这里不需要添加功能，禁止用户自己添加影片
 		}
 	},
 });

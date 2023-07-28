@@ -27,7 +27,7 @@ const close = () => {
 const save = () => {
 	// 此处并不应该触发关闭，应该由回调执行
 	emit("save");
-	emit("close");
+	// emit("close");
 };
 </script>
 <template>

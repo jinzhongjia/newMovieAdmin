@@ -47,7 +47,7 @@ const add = () => {
 				:show="categoryModal.show"
 				:type="categoryModal.type"
 				@close="categoryModal.close"
-				@save="categoryModal.save"
+				@save="categoryModal.save(categoryModal.close)"
 			/>
 		</template>
 	</general-data-table>

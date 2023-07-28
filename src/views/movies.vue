@@ -86,7 +86,7 @@ const add = () => {
 				:show="movieModal.show"
 				:type="movieModal.type"
 				@close="movieModal.close"
-				@save="movieModal.save"
+				@save="movieModal.save(movieModal.close)"
 			/>
 		</template>
 	</general-data-table>

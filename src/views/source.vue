@@ -47,7 +47,7 @@ const add = () => {
 				:show="sourceModal.show"
 				:type="sourceModal.type"
 				@close="sourceModal.close"
-				@save="sourceModal.save"
+				@save="sourceModal.save(sourceModal.close)"
 			/>
 		</template>
 	</general-data-table>
