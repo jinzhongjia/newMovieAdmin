@@ -1,7 +1,7 @@
-import { mobileWidth } from "@/tool/config";
+import { mobileWidth } from '@/tool/config'
 
 const checkMobileMode = () => {
-	return document.body.clientWidth <= mobileWidth;
-};
+    return document.body.clientWidth <= mobileWidth
+}
 
-export { checkMobileMode };
+export { checkMobileMode }

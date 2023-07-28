@@ -1,12 +1,12 @@
-const loading = ref(true);
+const loading = ref(true)
 
 function loading_ok() {
-	loading.value = false;
+    loading.value = false
 }
 function loading_not_ok() {
-	loading.value = true;
+    loading.value = true
 }
 
-const loading_status = computed(() => loading.value);
+const loading_status = computed(() => loading.value)
 
-export { loading_ok,loading_not_ok, loading_status };
+export { loading_ok, loading_not_ok, loading_status }

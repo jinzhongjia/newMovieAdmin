@@ -1,14 +1,14 @@
+import routes from '@/router/route'
 import {
-	createRouter,
-	createWebHistory,
-	createWebHashHistory,
-} from "vue-router";
-import routes from "@/router/route";
+    createRouter,
+    createWebHistory,
+    createWebHashHistory,
+} from 'vue-router'
 
 const router = createRouter({
-	history: createWebHashHistory(import.meta.env.BASE_URL),
-	routes,
-	strict: true,
-});
+    history: createWebHashHistory(import.meta.env.BASE_URL),
+    routes,
+    strict: true,
+})
 
-export default router;
+export default router
