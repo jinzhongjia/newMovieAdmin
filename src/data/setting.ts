@@ -4,6 +4,7 @@ import {
     purge_cache,
     get_collect_interval,
     update_collect_interval,
+    exports,
 } from '@/tool/api'
 
 const account = ref<string>('')
@@ -14,7 +15,7 @@ const interavelLoading = ref<boolean>(false)
 const cacheLoading = ref<boolean>(false)
 
 const updateAccount = () => {
-    update_account(account.value, (_: number, data: any) => {
+    update_account(account.value, (_: number, _data: any) => {
         window.$message.success('更新账户成功')
     })
 }
@@ -43,6 +44,22 @@ const getInterval = () => {
     })
 }
 
+const save_db = () => {
+    exports(async (_: number, data: Blob) => {
+        var text = await data.text()
+
+        var blob = new Blob([text], { type: 'text/plain' })
+        var a = document.createElement('a')
+        a.href = URL.createObjectURL(blob)
+        a.download = 'movie.db'
+        a.click()
+    })
+}
+
+const choose_db=()=>{
+
+}
+
 export {
     account,
     password,
@@ -55,4 +72,5 @@ export {
     purgeCache,
     UpdateInterval,
     getInterval,
+    save_db,
 }

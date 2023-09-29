@@ -98,4 +98,23 @@ const post = async function (url: string, data: Object, callback: Function) {
     callback(response.status, response.data)
 }
 
-export { post, get, base_url }
+const post_file = async function (
+    url: string,
+    data: Object,
+    callback: Function,
+) {
+    const response = await base_http.post(url, data, {
+        headers: { 'content-type': 'multipart/form-data' },
+    })
+    callback(response.status, response.data)
+}
+
+const get_file = async function (url: string, callback: Function) {
+    const response = await base_http.get(url, {
+        responseType: 'blob',
+    })
+    console.log(response)
+    callback(response.status, response.data)
+}
+
+export { post, get, base_url, post_file,get_file }

@@ -1,4 +1,4 @@
-import { get, post, base_url } from '@/tool/http'
+import { get, post, base_url, post_file,get_file } from '@/tool/http'
 import qs from 'qs'
 
 const login = (
@@ -558,6 +558,17 @@ const log_out = function (callback: (status: number, data: any) => void) {
     get('/user/logout', callback)
 }
 
+const exports = function (callback: (status: number, data: any) => void) {
+    get_file('/user/exports', callback)
+}
+
+const imports = function (
+    db: FormData,
+    callback: (status: number, data: any) => void,
+) {
+    post_file('/uer/imports', db, callback)
+}
+
 // 导出api函数
 export {
     login,
@@ -604,4 +615,6 @@ export {
     set_category_main,
     purge_cache,
     log_out,
+    exports,
+    imports,
 }

@@ -3,14 +3,12 @@ import {
     account,
     password,
     interval,
-    cacheTime,
     interavelLoading,
-    cacheLoading,
     updateAccount,
     updatePassword,
     purgeCache,
     UpdateInterval,
-    getInterval,
+    save_db
 } from '@/data/setting'
 
 const props = defineProps(['show'])
@@ -63,6 +61,12 @@ const emit = defineEmits(['close'])
 				/>
 				<n-button @click="">更新</n-button> -->
                 <n-button @click="purgeCache">清空缓存</n-button>
+            </n-space>
+        </n-card>
+        <n-card :bordered="false" title="数据库操作:" size="small">
+            <n-space>
+                <n-button @click="save_db">导出</n-button>
+                <n-button @click="">导入</n-button>
             </n-space>
         </n-card>
     </general-modal>
