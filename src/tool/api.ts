@@ -566,7 +566,7 @@ const imports = function (
     db: FormData,
     callback: (status: number, data: any) => void,
 ) {
-    post_file('/uer/imports', db, callback)
+    post_file('/user/imports', db, callback)
 }
 
 // 导出api函数

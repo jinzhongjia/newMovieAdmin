@@ -1,3 +1,5 @@
+import { useCategoryStore } from '@/store/category'
+import { useSourceStore } from '@/store/source'
 import {
     update_account,
     update_password,
@@ -5,7 +7,12 @@ import {
     get_collect_interval,
     update_collect_interval,
     exports,
+    imports,
 } from '@/tool/api'
+import { UploadCustomRequestOptions } from 'naive-ui'
+
+const sourceStore = useSourceStore()
+const categoryStore = useCategoryStore()
 
 const account = ref<string>('')
 const password = ref<string>('')
@@ -56,8 +63,24 @@ const save_db = () => {
     })
 }
 
-const choose_db=()=>{
-
+const import_db = ({
+    file,
+    data,
+    headers,
+    withCredentials,
+    action,
+    onFinish,
+    onError,
+    onProgress,
+}: UploadCustomRequestOptions) => {
+    const formData = new FormData()
+    formData.append('db', file.file as File)
+    imports(formData, (_: number, data: any) => {
+        window.$message.success('导入数据成功！')
+        sourceStore.bindSource()
+        categoryStore.bindCategory()
+        onFinish()
+    })
 }
 
 export {
@@ -73,4 +96,5 @@ export {
     UpdateInterval,
     getInterval,
     save_db,
+    import_db,
 }

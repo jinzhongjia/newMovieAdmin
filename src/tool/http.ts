@@ -117,4 +117,4 @@ const get_file = async function (url: string, callback: Function) {
     callback(response.status, response.data)
 }
 
-export { post, get, base_url, post_file,get_file }
+export { post, get, base_url, post_file, get_file }

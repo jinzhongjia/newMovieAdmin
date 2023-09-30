@@ -8,11 +8,13 @@ import {
     updatePassword,
     purgeCache,
     UpdateInterval,
-    save_db
+    save_db,
+    import_db,
 } from '@/data/setting'
 
 const props = defineProps(['show'])
 const emit = defineEmits(['close'])
+
 </script>
 <template>
     <general-modal
@@ -66,7 +68,13 @@ const emit = defineEmits(['close'])
         <n-card :bordered="false" title="数据库操作:" size="small">
             <n-space>
                 <n-button @click="save_db">导出</n-button>
-                <n-button @click="">导入</n-button>
+                <n-upload
+                    :show-file-list="false"
+                    :custom-request="import_db"
+                    :max="1"
+                >
+                    <n-button>导入</n-button>
+                </n-upload>
             </n-space>
         </n-card>
     </general-modal>
