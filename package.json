@@ -33,7 +33,7 @@
     "unplugin-vue-components": "^0.22.12",
     "vfonts": "^0.0.3",
     "vite": "^4.5.2",
-    "vue-i18n": "^9.2.2",
+    "vue-i18n": "^9.14.3",
     "vue-router": "^4.2.2",
     "vue-tsc": "^1.6.5"
   }
