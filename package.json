@@ -21,7 +21,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/compiler-sfc": "^3.3.4",
     "@vueuse/core": "^10.1.2",
-    "axios": "^1.4.0",
+    "axios": "^1.8.2",
     "naive-ui": "^2.34.4",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.3",
